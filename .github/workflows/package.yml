@@ -82,7 +82,7 @@ jobs:
       # The app says which release it is (2.0.0-alpha.4, not only 2.0.0), and the version code goes up with each alpha.
       - name: Tell the build which release it is
         shell: bash
-        run: echo "TELEPAD_RELEASE_VERSION=${TAG#v}" >> "$GITHUB_ENV"
+        run: echo "BECKON_RELEASE_VERSION=${TAG#v}" >> "$GITHUB_ENV"
 
       # The tests are CI's (the screen tests need the test activity that Compose only adds to debug builds). This
       # builds what is shipped: the R8-minified release, which can break things the debug build never shows.
@@ -110,7 +110,7 @@ jobs:
             echo "::error::Release APK was not generated under android/app/build/outputs/apk/release"
             exit 1
           fi
-          cp "$APK_SRC" "dist/telepad-android-${TAG}.apk"
+          cp "$APK_SRC" "dist/beckon-android-${TAG}.apk"
           ls -la dist
 
       - name: Upload APK artifact
@@ -148,18 +148,18 @@ jobs:
       # The apps say which release they are (2.0.0-alpha.4, not only 2.0.0), which is what update checks compare.
       - name: Tell the build which release it is
         shell: bash
-        run: echo "TELEPAD_RELEASE_VERSION=${TAG#v}" >> "$GITHUB_ENV"
+        run: echo "BECKON_RELEASE_VERSION=${TAG#v}" >> "$GITHUB_ENV"
 
       # CI is set, so a build that cannot embed the icon and version information fails instead of shipping without.
       - name: Build the apps
-        run: cargo build --release --locked --bin telepad --bin telepad-server
+        run: cargo build --release --locked --bin beckon --bin beckon-server
 
       - name: Check the program has its icon and name
         shell: pwsh
         run: |
-          $info = (Get-Item target/release/telepad.exe).VersionInfo
+          $info = (Get-Item target/release/beckon.exe).VersionInfo
           Write-Host "ProductName=$($info.ProductName) FileDescription=$($info.FileDescription) Version=$($info.FileVersion)"
-          if ($info.FileDescription -ne 'Telepad') { throw "telepad.exe has no version information" }
+          if ($info.FileDescription -ne 'Beckon') { throw "beckon.exe has no version information" }
 
       # --- Signing the programs (only when the SignPath account is set up) -----------------------------
       - name: Collect the programs to sign
@@ -167,7 +167,7 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path unsigned | Out-Null
-          Copy-Item target/release/telepad.exe, target/release/telepad-server.exe unsigned/
+          Copy-Item target/release/beckon.exe, target/release/beckon-server.exe unsigned/
 
       - name: Upload the programs to sign
         id: unsigned-programs
@@ -184,7 +184,7 @@ jobs:
         with:
           api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
           organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
-          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG || 'telepad' }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG || 'beckon' }}
           signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG || 'release-signing' }}
           artifact-configuration-slug: programs
           github-artifact-id: ${{ steps.unsigned-programs.outputs.artifact-id }}
@@ -204,7 +204,7 @@ jobs:
           $iscc = Join-Path ${env:ProgramFiles(x86)} 'Inno Setup 6\ISCC.exe'
           if (-not (Test-Path $iscc)) { choco install innosetup --no-progress -y | Out-Host }
           New-Item -ItemType Directory -Force -Path dist | Out-Null
-          & $iscc "/DVersion=$version" "/DSource=$PWD\target\release\telepad.exe" "/DOutputDir=$PWD\dist" "/DOutputName=telepad-$($env:TAG)-windows-x86_64-setup" packaging\windows\telepad.iss
+          & $iscc "/DVersion=$version" "/DSource=$PWD\target\release\beckon.exe" "/DOutputDir=$PWD\dist" "/DOutputName=beckon-$($env:TAG)-windows-x86_64-setup" packaging\windows\beckon.iss
           if ($LASTEXITCODE -ne 0) { throw "Inno Setup failed with exit code $LASTEXITCODE" }
 
       - name: Upload the installer to sign
@@ -222,7 +222,7 @@ jobs:
         with:
           api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
           organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
-          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG || 'telepad' }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG || 'beckon' }}
           signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG || 'release-signing' }}
           artifact-configuration-slug: installer
           github-artifact-id: ${{ steps.unsigned-installer.outputs.artifact-id }}
@@ -239,16 +239,16 @@ jobs:
         shell: pwsh
         run: |
           $setup = (Get-ChildItem dist/*-setup.exe).FullName
-          $dir = Join-Path $env:LOCALAPPDATA 'Programs\Telepad'
+          $dir = Join-Path $env:LOCALAPPDATA 'Programs\Beckon'
           Start-Process -FilePath $setup -ArgumentList '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/TASKS=autostart' -Wait
-          if (-not (Test-Path "$dir\telepad.exe")) { throw "the installer did not install telepad.exe" }
-          $run = (Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run').Telepad
-          if ($run -ne "`"$dir\telepad.exe`" --background") { throw "the start-at-sign-in entry is wrong: $run" }
+          if (-not (Test-Path "$dir\beckon.exe")) { throw "the installer did not install beckon.exe" }
+          $run = (Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run').Beckon
+          if ($run -ne "`"$dir\beckon.exe`" --background") { throw "the start-at-sign-in entry is wrong: $run" }
           Start-Process -FilePath "$dir\unins000.exe" -ArgumentList '/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART' -Wait
           # The uninstaller hands over to a copy of itself and returns at once, so wait for the files to go.
-          for ($i = 0; $i -lt 60 -and (Test-Path "$dir\telepad.exe"); $i++) { Start-Sleep -Seconds 1 }
-          if (Test-Path "$dir\telepad.exe") { throw "the uninstaller did not remove telepad.exe" }
-          if ((Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run').Telepad) { throw "the start-at-sign-in entry was left behind" }
+          for ($i = 0; $i -lt 60 -and (Test-Path "$dir\beckon.exe"); $i++) { Start-Sleep -Seconds 1 }
+          if (Test-Path "$dir\beckon.exe") { throw "the uninstaller did not remove beckon.exe" }
+          if ((Get-ItemProperty 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Run').Beckon) { throw "the start-at-sign-in entry was left behind" }
 
       - name: Record whether this build is signed
         id: signed
@@ -261,12 +261,12 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path dist | Out-Null
-          foreach ($exe in 'telepad.exe', 'telepad-server.exe') {
+          foreach ($exe in 'beckon.exe', 'beckon-server.exe') {
             if (-not (Test-Path "target/release/$exe")) { throw "Windows binary not found: target/release/$exe" }
           }
-          Copy-Item target/release/telepad.exe "dist/telepad-${env:TAG}-windows-x86_64.exe"
-          Copy-Item target/release/telepad-server.exe "dist/telepad-server-${env:TAG}-windows-x86_64.exe"
-          Compress-Archive -Path target/release/telepad-server.exe, LICENSE, THIRD_PARTY_LICENSES.md -DestinationPath "dist/telepad-server-${env:TAG}-windows-x86_64.zip" -Force
+          Copy-Item target/release/beckon.exe "dist/beckon-${env:TAG}-windows-x86_64.exe"
+          Copy-Item target/release/beckon-server.exe "dist/beckon-server-${env:TAG}-windows-x86_64.exe"
+          Compress-Archive -Path target/release/beckon-server.exe, LICENSE, THIRD_PARTY_LICENSES.md -DestinationPath "dist/beckon-server-${env:TAG}-windows-x86_64.zip" -Force
           Get-ChildItem dist
 
       - name: Upload Windows artifact
@@ -305,10 +305,10 @@ jobs:
       # The apps say which release they are (2.0.0-alpha.4, not only 2.0.0), which is what update checks compare.
       - name: Tell the build which release it is
         shell: bash
-        run: echo "TELEPAD_RELEASE_VERSION=${TAG#v}" >> "$GITHUB_ENV"
+        run: echo "BECKON_RELEASE_VERSION=${TAG#v}" >> "$GITHUB_ENV"
 
       - name: Build the apps
-        run: cargo build --release --locked --bin telepad --bin telepad-server
+        run: cargo build --release --locked --bin beckon --bin beckon-server
 
       # nfpm builds the .deb, .rpm and Arch packages; checked against the checksums its release publishes.
       - name: Install nfpm
@@ -325,17 +325,17 @@ jobs:
       - name: Package
         run: |
           mkdir -p dist
-          for bin in telepad telepad-server; do
+          for bin in beckon beckon-server; do
             if [ ! -f "target/release/$bin" ]; then
               echo "::error::Linux binary not found at target/release/$bin"
               exit 1
             fi
             chmod +x "target/release/$bin"
           done
-          bash packaging/linux/package.sh "telepad-${TAG}-linux-x86_64" target/release/telepad dist
-          tar -czvf "dist/telepad-server-${TAG}-linux-x86_64.tar.gz" -C target/release telepad-server -C "$PWD" LICENSE THIRD_PARTY_LICENSES.md
+          bash packaging/linux/package.sh "beckon-${TAG}-linux-x86_64" target/release/beckon dist
+          tar -czvf "dist/beckon-server-${TAG}-linux-x86_64.tar.gz" -C target/release beckon-server -C "$PWD" LICENSE THIRD_PARTY_LICENSES.md
           # The .deb, .rpm and Arch packages, which set up the permission to type as well as installing the program.
-          bash packaging/linux/build-packages.sh "$TAG" "telepad-${TAG}-linux-x86_64" target/release/telepad dist
+          bash packaging/linux/build-packages.sh "$TAG" "beckon-${TAG}-linux-x86_64" target/release/beckon dist
           ls -la dist
 
       # The tarball the way a person installs it, then each package in a real distribution of its kind (run, and
@@ -343,16 +343,16 @@ jobs:
       - name: Try the packages
         run: |
           VERSION="${TAG#v}"   # the program says its whole version, as the build was told to
-          desktop-file-validate packaging/linux/telepad.desktop
+          desktop-file-validate packaging/linux/beckon.desktop
           mkdir -p "$RUNNER_TEMP/unpacked" "$RUNNER_TEMP/home"
-          tar -xzf "dist/telepad-${TAG}-linux-x86_64.tar.gz" -C "$RUNNER_TEMP/unpacked"
+          tar -xzf "dist/beckon-${TAG}-linux-x86_64.tar.gz" -C "$RUNNER_TEMP/unpacked"
           (
             export HOME="$RUNNER_TEMP/home" XDG_CONFIG_HOME="$RUNNER_TEMP/home/.config"
-            "$RUNNER_TEMP/unpacked/telepad-${TAG}-linux-x86_64/install.sh"
-            [ "$("$HOME/.local/bin/telepad" --version)" = "telepad $VERSION" ]
-            desktop-file-validate "$HOME/.local/share/applications/telepad.desktop"
-            "$RUNNER_TEMP/unpacked/telepad-${TAG}-linux-x86_64/install.sh" --uninstall
-            test ! -e "$HOME/.local/bin/telepad"
+            "$RUNNER_TEMP/unpacked/beckon-${TAG}-linux-x86_64/install.sh"
+            [ "$("$HOME/.local/bin/beckon" --version)" = "beckon $VERSION" ]
+            desktop-file-validate "$HOME/.local/share/applications/beckon.desktop"
+            "$RUNNER_TEMP/unpacked/beckon-${TAG}-linux-x86_64/install.sh" --uninstall
+            test ! -e "$HOME/.local/bin/beckon"
           )
           bash packaging/linux/tests/run.sh dist "$VERSION"
           bash packaging/linux/tests/installer.sh dist "$TAG" "$VERSION"
@@ -402,46 +402,46 @@ jobs:
       # The apps say which release they are (2.0.0-alpha.4, not only 2.0.0), which is what update checks compare.
       - name: Tell the build which release it is
         shell: bash
-        run: echo "TELEPAD_RELEASE_VERSION=${TAG#v}" >> "$GITHUB_ENV"
+        run: echo "BECKON_RELEASE_VERSION=${TAG#v}" >> "$GITHUB_ENV"
 
       - name: Build both architectures
         run: |
           for target in aarch64-apple-darwin x86_64-apple-darwin; do
-            cargo build --release --locked --bin telepad --bin telepad-server --target "$target"
+            cargo build --release --locked --bin beckon --bin beckon-server --target "$target"
           done
 
       - name: Create universal binaries
         run: |
           mkdir -p dist universal
-          for bin in telepad telepad-server; do
+          for bin in beckon beckon-server; do
             lipo -create -output "universal/$bin" \
               "target/aarch64-apple-darwin/release/$bin" \
               "target/x86_64-apple-darwin/release/$bin"
             lipo -info "universal/$bin"
             chmod +x "universal/$bin"
           done
-          tar -czvf "dist/telepad-server-${TAG}-macos-universal.tar.gz" -C universal telepad-server -C "$PWD" LICENSE THIRD_PARTY_LICENSES.md
+          tar -czvf "dist/beckon-server-${TAG}-macos-universal.tar.gz" -C universal beckon-server -C "$PWD" LICENSE THIRD_PARTY_LICENSES.md
 
       - name: Build the app
         run: |
           VERSION="${TAG#v}"
           VERSION="${VERSION%%-*}"
-          bash packaging/macos/make-app.sh "$VERSION" universal/telepad app
+          bash packaging/macos/make-app.sh "$VERSION" universal/beckon app
 
       # Ad hoc without the Apple credentials; with them: Developer ID, notarized and stapled.
       - name: Sign the app
-        run: bash packaging/macos/sign-and-notarize.sh app app/Telepad.app
+        run: bash packaging/macos/sign-and-notarize.sh app app/Beckon.app
 
       - name: Make the disk image
-        run: bash packaging/macos/make-dmg.sh "telepad-${TAG}-macos-universal" app/Telepad.app dist
+        run: bash packaging/macos/make-dmg.sh "beckon-${TAG}-macos-universal" app/Beckon.app dist
 
       - name: Check the disk image opens and the app in it runs
         run: |
           mkdir -p "$RUNNER_TEMP/dmg"
-          hdiutil attach "dist/telepad-${TAG}-macos-universal.dmg" -nobrowse -readonly -mountpoint "$RUNNER_TEMP/dmg"
+          hdiutil attach "dist/beckon-${TAG}-macos-universal.dmg" -nobrowse -readonly -mountpoint "$RUNNER_TEMP/dmg"
           ls -la "$RUNNER_TEMP/dmg"
-          codesign --verify --strict --verbose=2 "$RUNNER_TEMP/dmg/Telepad.app"
-          "$RUNNER_TEMP/dmg/Telepad.app/Contents/MacOS/telepad" --version
+          codesign --verify --strict --verbose=2 "$RUNNER_TEMP/dmg/Beckon.app"
+          "$RUNNER_TEMP/dmg/Beckon.app/Contents/MacOS/beckon" --version
           hdiutil detach "$RUNNER_TEMP/dmg"
 
       - name: Record whether this build is signed and notarized

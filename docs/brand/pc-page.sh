@@ -23,7 +23,7 @@ inner() {
   printf '#!/usr/bin/env bash\nexit 0\n' > "$out/bin/xdg-open"
   chmod +x "$out/bin/xdg-open"
   export PATH="$out/bin:$PATH" XDG_CONFIG_HOME="$out/config" DBUS_SESSION_BUS_ADDRESS=unix:path=/nonexistent
-  "$repo/target/debug/telepad" --key-dir "$out/keys" --port 5000 --no-input --no-open --background > "$out/app.log" 2>&1 &
+  "$repo/target/debug/beckon" --key-dir "$out/keys" --port 5000 --no-input --no-open --background > "$out/app.log" 2>&1 &
   app=$!
   for _ in $(seq 1 50); do [ -s "$out/keys/panel.url" ] && break; sleep 0.2; done
   chromium --headless=new --no-sandbox --disable-gpu --hide-scrollbars --force-device-scale-factor=2 \
@@ -36,7 +36,7 @@ inner() {
 if [ "${1:-}" = "--inner" ]; then
   inner "$2"
 else
-  (cd "$repo" && cargo build -p telepad-tray)
+  (cd "$repo" && cargo build -p beckon-tray)
   work="$(mktemp -d)"
   cleanup() { if [ -n "${work:-}" ] && [ -d "$work" ]; then rm -r -- "$work"; fi; }
   trap cleanup EXIT

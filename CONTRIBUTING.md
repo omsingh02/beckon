@@ -1,9 +1,9 @@
-# Contributing to Telepad
+# Contributing to Beckon
 
 Thank you for wanting to help. Bug reports, ideas, documentation fixes and patches are all welcome.
 
-- **Found a bug or have an idea?** Open an [issue](https://github.com/omsingh02/telepad/issues/new/choose). For a bug, say what you did, what you expected, what happened, and your phone, PC operating system and Telepad versions (the app's *Settings → About*, and the PC page's footer or `telepad --version`), and attach the desktop app's log if you can (the README says where it is).
-- **Have a question?** Ask in [Discussions](https://github.com/omsingh02/telepad/discussions).
+- **Found a bug or have an idea?** Open an [issue](https://github.com/omsingh02/beckon/issues/new/choose). For a bug, say what you did, what you expected, what happened, and your phone, PC operating system and Beckon versions (the app's *Settings → About*, and the PC page's footer or `beckon --version`), and attach the desktop app's log if you can (the README says where it is).
+- **Have a question?** Ask in [Discussions](https://github.com/omsingh02/beckon/discussions).
 - Everyone taking part is expected to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 - **Found a security problem?** Please do not open a public issue. See [SECURITY.md](SECURITY.md).
 - **Want to change something big?** Open an issue first so we can agree on the direction before you spend a weekend on it.
@@ -12,12 +12,12 @@ Thank you for wanting to help. Bug reports, ideas, documentation fixes and patch
 
 | | |
 | :--- | :--- |
-| `crates/telepad-protocol` | The wire protocol: message types and their encoding. No I/O. |
-| `crates/telepad-crypto` | The Noise IK handshake, the replay window, key storage, fingerprints. |
-| `crates/telepad-platform` | The operating-system layer: Windows `SendInput`, Linux `uinput`, macOS CoreGraphics, clipboard, network interfaces, config paths. |
-| `crates/telepad-server` | The desktop server: discovery, pairing policy, invitations (QR codes), sessions, console. |
-| `crates/telepad-update` | Looks for a newer release (GitHub's release feed and the release's `SHA256SUMS`), downloads and checks it, and installs it the way that copy was installed. The Android app has its own version of the same in `update/`. |
-| `crates/telepad-tray` | The `telepad` app: tray icon, the page with the QR code, start at login, one copy at a time, the log file, the permission step and the update buttons. |
+| `crates/beckon-protocol` | The wire protocol: message types and their encoding. No I/O. |
+| `crates/beckon-crypto` | The Noise IK handshake, the replay window, key storage, fingerprints. |
+| `crates/beckon-platform` | The operating-system layer: Windows `SendInput`, Linux `uinput`, macOS CoreGraphics, clipboard, network interfaces, config paths. |
+| `crates/beckon-server` | The desktop server: discovery, pairing policy, invitations (QR codes), sessions, console. |
+| `crates/beckon-update` | Looks for a newer release (GitHub's release feed and the release's `SHA256SUMS`), downloads and checks it, and installs it the way that copy was installed. The Android app has its own version of the same in `update/`. |
+| `crates/beckon-tray` | The `beckon` app: tray icon, the page with the QR code, start at login, one copy at a time, the log file, the permission step and the update buttons. |
 | `packaging/` | The Windows installer, the macOS app and disk image, the Linux tarball, icons, and the package-manager manifests. See [packaging/README.md](packaging/README.md). |
 | `android/` | The Android app (Kotlin, Jetpack Compose). See the structure in the [README](README.md#android-app-structure). |
 
@@ -53,10 +53,10 @@ The desktop app writes a log file (see the README) that must never contain what 
 To try the server without letting it move your real mouse, run it without input injection and with a scratch key directory:
 
 ```bash
-cargo run -p telepad-server -- --no-input --key-dir /tmp/telepad-dev --pair
+cargo run -p beckon-server -- --no-input --key-dir /tmp/beckon-dev --pair
 ```
 
-Some tests need the real operating system: the Linux `uinput` tests skip themselves when `/dev/uinput` cannot be opened (see the README's Linux notes to enable it), and the Windows cursor test is `#[ignore]`d because it needs an interactive desktop (`cargo test -p telepad-platform --test windows_send_input -- --ignored`).
+Some tests need the real operating system: the Linux `uinput` tests skip themselves when `/dev/uinput` cannot be opened (see the README's Linux notes to enable it), and the Windows cursor test is `#[ignore]`d because it needs an interactive desktop (`cargo test -p beckon-platform --test windows_send_input -- --ignored`).
 
 ### Android app
 
@@ -107,8 +107,8 @@ Keep the copy honest: say only what the app and the server really do. If a claim
 
 **Design.** The look comes from the theme, so that every accent and both light and dark stay consistent and readable:
 
-- Colors: `MaterialTheme.colorScheme.*`, or `TelepadTheme.extended.*` for the app's own roles (success, warning, the pad). Never a literal `Color(0xFF…)` in a screen. The schemes are generated and tested for WCAG contrast; a hand-picked color is not.
-- Spacing, shapes and type: `Spacing`, `TelepadShapes` and `MaterialTheme.typography`.
+- Colors: `MaterialTheme.colorScheme.*`, or `BeckonTheme.extended.*` for the app's own roles (success, warning, the pad). Never a literal `Color(0xFF…)` in a screen. The schemes are generated and tested for WCAG contrast; a hand-picked color is not.
+- Spacing, shapes and type: `Spacing`, `BeckonShapes` and `MaterialTheme.typography`.
 - Motion: through `Motion` and `rememberReducedMotion()`, so nothing moves for people who have turned animations off.
 - Touch targets are at least 48 dp, and every control has a visible label or a content description. Check the screen with TalkBack.
 - Look at your change in portrait, landscape, a tablet, light, dark and with a large font size. The fixtures in `ui/Fixtures.kt` make that quick.
@@ -119,7 +119,7 @@ Keep the copy honest: say only what the app and the server really do. If a claim
 
 ## Writing Rust code
 
-- Keep `telepad-protocol` free of I/O, and `telepad-platform` the only place that touches the operating system.
+- Keep `beckon-protocol` free of I/O, and `beckon-platform` the only place that touches the operating system.
 - Anything that reads from the network is hostile input. Decoders return errors; they never panic, and lengths are checked before they are used.
 - Platform code is easy to break on the systems you cannot run. Keep OS-specific decisions in small pure functions (see `os/linux/actions.rs` and `os/macos_plan.rs`) that are tested everywhere, with the actual system calls as thin as possible.
 - Changes to the protocol add a new message tag; they do not change the meaning of an existing one, so that an old phone and a new PC (or the other way around) still understand each other.

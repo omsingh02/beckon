@@ -1,6 +1,6 @@
 # Code signing
 
-Operating systems warn about programs they cannot tie to a known publisher: Windows shows *Windows protected your PC* (SmartScreen), macOS says it *cannot verify* the app, and Android's Play Protect asks before an app from outside the Play Store installs. A signed program shows who made it, and a notarized Mac app opens without a question. This page says what is signed today, what is not, and exactly what to set up to change that. Nothing here is needed to build or run Telepad.
+Operating systems warn about programs they cannot tie to a known publisher: Windows shows *Windows protected your PC* (SmartScreen), macOS says it *cannot verify* the app, and Android's Play Protect asks before an app from outside the Play Store installs. A signed program shows who made it, and a notarized Mac app opens without a question. This page says what is signed today, what is not, and exactly what to set up to change that. Nothing here is needed to build or run Beckon.
 
 ## Where things stand
 
@@ -8,7 +8,7 @@ Operating systems warn about programs they cannot tie to a known publisher: Wind
 | :--- | :--- | :--- |
 | Android APK | **Yes**, with the project's release key | Phones can update the app in place, and a tampered APK is refused. Play Protect may still ask, because the app is not from the Play Store. |
 | Windows installer and `.exe` | No | SmartScreen: *More info → Run anyway* |
-| macOS `Telepad.app` and `.dmg` | Ad hoc only (what an Apple silicon Mac needs to run it at all) | Gatekeeper: *System Settings → Privacy & Security → Open Anyway*. The Accessibility permission usually has to be given again after an update. |
+| macOS `Beckon.app` and `.dmg` | Ad hoc only (what an Apple silicon Mac needs to run it at all) | Gatekeeper: *System Settings → Privacy & Security → Open Anyway*. The Accessibility permission usually has to be given again after an update. |
 | Linux tarball | No (Linux has no such gatekeeper) | None |
 | **Every file** | **A build attestation** and a SHA-256 in `SHA256SUMS` | Proves *which workflow run, from which commit,* built the file (see below) |
 
@@ -18,7 +18,7 @@ The release notes say, for each of Windows and macOS, whether that build was sig
 
 ```bash
 sha256sum -c SHA256SUMS --ignore-missing
-gh attestation verify telepad-windows-x86_64-setup.exe --repo omsingh02/telepad
+gh attestation verify beckon-windows-x86_64-setup.exe --repo omsingh02/beckon
 ```
 
 `gh attestation verify` checks a signature made by GitHub's own build system (Sigstore) over the file's digest: the file is the one that the `Release` workflow of this repository built, from the tagged commit. It does not make Windows or macOS stop warning; only the steps below do that.
@@ -31,14 +31,14 @@ The release workflow already contains the signing steps. Each switches on by its
 
 [SignPath Foundation](https://signpath.org/) signs open source projects for free, with a certificate in the Foundation's name (the publisher shows as *SignPath Foundation*). Check their current terms; at the time of writing a project needs an OSI-approved licence, to be released and actively maintained, to say how it signs, and its maintainers to use two-factor sign-in.
 
-1. **Apply** through the *Apply* link at <https://signpath.org/> for `omsingh02/telepad`. Once the project is approved, SignPath creates an organization for it.
-2. **In SignPath** (the web page of that organization): create a project with the slug `telepad`; add the GitHub repository as a *trusted build system* (SignPath explains the GitHub connector there); create two *artifact configurations* and one *signing policy*:
+1. **Apply** through the *Apply* link at <https://signpath.org/> for `omsingh02/beckon`. Once the project is approved, SignPath creates an organization for it.
+2. **In SignPath** (the web page of that organization): create a project with the slug `beckon`; add the GitHub repository as a *trusted build system* (SignPath explains the GitHub connector there); create two *artifact configurations* and one *signing policy*:
    - artifact configuration `programs`, for the program files:
      ```xml
      <artifact-configuration xmlns="http://signpath.io/artifact-configuration/v1">
        <zip-file>
-         <pe-file path="telepad.exe"><authenticode-sign/></pe-file>
-         <pe-file path="telepad-server.exe"><authenticode-sign/></pe-file>
+         <pe-file path="beckon.exe"><authenticode-sign/></pe-file>
+         <pe-file path="beckon-server.exe"><authenticode-sign/></pe-file>
        </zip-file>
      </artifact-configuration>
      ```
@@ -57,7 +57,7 @@ The release workflow already contains the signing steps. Each switches on by its
    | :--- | :--- | :--- |
    | Secret | `SIGNPATH_API_TOKEN` | an API token of a SignPath user who may submit for this project |
    | Variable | `SIGNPATH_ORGANIZATION_ID` | the organization's id (it is in the address of SignPath's pages for the organization) |
-   | Variable (optional) | `SIGNPATH_PROJECT_SLUG` | only if it is not `telepad` |
+   | Variable (optional) | `SIGNPATH_PROJECT_SLUG` | only if it is not `beckon` |
    | Variable (optional) | `SIGNPATH_SIGNING_POLICY_SLUG` | only if it is not `release-signing` |
 
 4. **Tag a release.** The workflow submits the programs, waits for approval (an email from SignPath; up to an hour), builds the installer from the signed programs, submits that, and publishes. The release notes then leave out the Windows warning text.
@@ -65,10 +65,10 @@ The release workflow already contains the signing steps. Each switches on by its
 
    > **Code signing policy.** Free code signing for Windows builds is provided by [SignPath.io](https://signpath.io), certificate by [SignPath Foundation](https://signpath.org). Every signed file is built by the [Release workflow](.github/workflows/release.yml) on GitHub-hosted runners from a tagged commit of this repository.
    >
-   > - **Committers and reviewers:** [Om Singh](https://github.com/omsingh02) and any contributor whose pull request is merged (see the [pull requests](https://github.com/omsingh02/telepad/pulls)).
+   > - **Committers and reviewers:** [Om Singh](https://github.com/omsingh02) and any contributor whose pull request is merged (see the [pull requests](https://github.com/omsingh02/beckon/pulls)).
    > - **Approvers:** [Om Singh](https://github.com/omsingh02). Each release is approved by hand in SignPath before it is published.
    >
-   > **Privacy policy.** This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it. Telepad sends what you type and do only to the phone or PC you paired it with, over your own network, and has no accounts, analytics or ads.
+   > **Privacy policy.** This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it. Beckon sends what you type and do only to the phone or PC you paired it with, over your own network, and has no accounts, analytics or ads.
 
 Other ways to sign on Windows, if SignPath does not suit: Microsoft's **Azure Trusted Signing** (a small monthly fee; check which countries and kinds of publisher it is open to), or an **OV/EV certificate** from a certificate authority with a cloud signing service (since 2023 the key must live in hardware, so a file in a secret is not enough). Both would replace the two SignPath steps in `.github/workflows/release.yml` with their own sign step.
 
@@ -104,13 +104,13 @@ Play Protect's prompt for apps from outside the Play Store goes away only by pub
 
 ```powershell
 # Windows
-Get-AuthenticodeSignature .\telepad-windows-x86_64-setup.exe | Format-List Status, SignerCertificate
+Get-AuthenticodeSignature .\beckon-windows-x86_64-setup.exe | Format-List Status, SignerCertificate
 ```
 ```bash
 # macOS
-spctl --assess --type open --context context:primary-signature -vv telepad-macos-universal.dmg
-codesign --verify --deep --strict --verbose=2 /Applications/Telepad.app
-xcrun stapler validate /Applications/Telepad.app
+spctl --assess --type open --context context:primary-signature -vv beckon-macos-universal.dmg
+codesign --verify --deep --strict --verbose=2 /Applications/Beckon.app
+xcrun stapler validate /Applications/Beckon.app
 ```
 
 ## What the workflow does without any of this

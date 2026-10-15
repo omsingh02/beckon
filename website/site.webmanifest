@@ -1,6 +1,6 @@
 {
-  "name": "Telepad",
-  "short_name": "Telepad",
+  "name": "Beckon",
+  "short_name": "Beckon",
   "description": "Your phone as a trackpad and keyboard for your computer.",
   "start_url": "/",
   "display": "browser",

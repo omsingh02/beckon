@@ -21,5 +21,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Telepad"
+rootProject.name = "Beckon"
 include(":app")

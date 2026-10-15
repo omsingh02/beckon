@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Telepad</string>
+    <string name="app_name">Beckon</string>
 
     <!-- Common actions -->
     <string name="action_cancel">Cancel</string>
@@ -49,43 +49,43 @@
     <string name="devices_open_remote">Open remote</string>
     <string name="devices_disconnect">Disconnect</string>
     <string name="devices_empty_title">Let’s find your PC</string>
-    <string name="devices_empty_body">Telepad turns your phone into a trackpad and keyboard for your computer. Set up takes a minute.</string>
-    <string name="devices_empty_step_install">Install Telepad on your PC</string>
+    <string name="devices_empty_body">Beckon turns your phone into a trackpad and keyboard for your computer. Set up takes a minute.</string>
+    <string name="devices_empty_step_install">Install Beckon on your PC</string>
     <string name="devices_empty_step_network">Put your phone and PC on the same Wi‑Fi</string>
-    <string name="devices_empty_step_run">Start Telepad on the PC, then scan the code it shows</string>
+    <string name="devices_empty_step_run">Start Beckon on the PC, then scan the code it shows</string>
     <string name="devices_scan">Scan QR code</string>
     <string name="scan_title">Scan the code on your PC</string>
-    <string name="scan_hint">Point the camera at the code Telepad shows on your PC. It pairs this phone in a moment.</string>
-    <string name="scan_where">No code on the screen? On your PC, click the Telepad icon and choose Pair a phone.</string>
+    <string name="scan_hint">Point the camera at the code Beckon shows on your PC. It pairs this phone in a moment.</string>
+    <string name="scan_where">No code on the screen? On your PC, click the Beckon icon and choose Pair a phone.</string>
     <string name="scan_close">Close the scanner</string>
     <string name="scan_camera_title">Allow the camera</string>
-    <string name="scan_camera_body">Telepad uses the camera only to read the code on your PC’s screen. Nothing is recorded or sent anywhere.</string>
+    <string name="scan_camera_body">Beckon uses the camera only to read the code on your PC’s screen. Nothing is recorded or sent anywhere.</string>
     <string name="scan_camera_allow">Allow camera</string>
-    <string name="scan_camera_denied_title">The camera is off for Telepad</string>
+    <string name="scan_camera_denied_title">The camera is off for Beckon</string>
     <string name="scan_camera_denied_body">Turn it on in the app’s settings to scan the code. You can also add the PC with its address.</string>
     <string name="scan_open_settings">Open settings</string>
     <string name="scan_no_camera">This phone has no camera that can scan. Add the PC with its address instead.</string>
-    <string name="scan_problem_not_telepad">That is not a Telepad code.</string>
-    <string name="scan_problem_newer">This code needs a newer version of Telepad.</string>
+    <string name="scan_problem_not_beckon">That is not a Beckon code.</string>
+    <string name="scan_problem_newer">This code needs a newer version of Beckon.</string>
     <string name="scan_problem_damaged">That code is damaged. Show a new one on the PC.</string>
     <string name="add_scan">Scan QR code</string>
     <string name="add_scan_hint">The quickest way. It pairs this phone with nothing to compare.</string>
-    <string name="devices_get_desktop">Get Telepad for your PC</string>
+    <string name="devices_get_desktop">Get Beckon for your PC</string>
     <string name="devices_help_title">Can’t find your PC?</string>
-    <string name="devices_help_1">Make sure Telepad is running on your PC.</string>
+    <string name="devices_help_1">Make sure Beckon is running on your PC.</string>
     <string name="devices_help_2">Connect your phone and PC to the same Wi‑Fi network.</string>
-    <string name="devices_help_3">Allow Telepad through the PC’s firewall (UDP port 5000).</string>
+    <string name="devices_help_3">Allow Beckon through the PC’s firewall (UDP port 5000).</string>
     <string name="devices_help_4">Guest and public networks often stop devices from seeing each other. Try your home network, or Bluetooth.</string>
     <string name="devices_help_5">If you know the PC’s IP address, you can enter it by hand.</string>
 
     <!-- Why a connection failed -->
     <string name="failure_unreachable_title">Couldn’t reach %1$s</string>
-    <string name="failure_unreachable_body">Check that the PC is on, Telepad is running, and both devices are on the same network. If they are, the PC’s firewall may be blocking Telepad: allow UDP port 5000.</string>
-    <string name="failure_unreachable_same_network">%1$s (%2$s) is on this network, so it is probably the PC that is blocking Telepad. Allow UDP port 5000 in its firewall (a Linux firewall rule has to cover the connection the PC is using, Wi‑Fi or Ethernet), then try again.</string>
-    <string name="failure_unreachable_other_network">This phone is on %3$s, but %1$s was last at %2$s: a different network. Join the PC’s network, or scan its QR code again so that Telepad finds it.</string>
+    <string name="failure_unreachable_body">Check that the PC is on, Beckon is running, and both devices are on the same network. If they are, the PC’s firewall may be blocking Beckon: allow UDP port 5000.</string>
+    <string name="failure_unreachable_same_network">%1$s (%2$s) is on this network, so it is probably the PC that is blocking Beckon. Allow UDP port 5000 in its firewall (a Linux firewall rule has to cover the connection the PC is using, Wi‑Fi or Ethernet), then try again.</string>
+    <string name="failure_unreachable_other_network">This phone is on %3$s, but %1$s was last at %2$s: a different network. Join the PC’s network, or scan its QR code again so that Beckon finds it.</string>
     <string name="failure_unreachable_no_network">This phone is not on a Wi‑Fi network. Connect it to the same network as %1$s, then try again.</string>
     <string name="failure_not_paired_title">%1$s hasn’t accepted this phone</string>
-    <string name="failure_not_paired_body">The PC only accepts new phones while pairing is open, or with a fresh QR code. On the PC, click the Telepad icon and choose Pair a phone, then scan the new code.</string>
+    <string name="failure_not_paired_body">The PC only accepts new phones while pairing is open, or with a fresh QR code. On the PC, click the Beckon icon and choose Pair a phone, then scan the new code.</string>
     <string name="failure_key_changed_title">%1$s has changed</string>
     <string name="failure_key_changed_body">It answers with a different identity than the one that was paired.</string>
     <string name="failure_handshake_title">Couldn’t secure the connection</string>
@@ -97,30 +97,30 @@
     <string name="failure_bt_disabled_title">Bluetooth is off</string>
     <string name="failure_bt_disabled_body">Turn Bluetooth on, then try again.</string>
     <string name="failure_bt_permission_title">Bluetooth permission needed</string>
-    <string name="failure_bt_permission_body">Telepad needs permission to talk to your paired Bluetooth devices.</string>
+    <string name="failure_bt_permission_body">Beckon needs permission to talk to your paired Bluetooth devices.</string>
     <string name="failure_bt_failed_title">Couldn’t connect over Bluetooth</string>
     <string name="failure_bt_failed_body">Make sure %1$s has been paired with this phone in its Bluetooth settings, and that no other app is using the Bluetooth keyboard role.</string>
 
     <!-- Pairing -->
     <string name="pairing_contacting">Contacting %1$s…</string>
     <string name="pairing_verify_title">Verify this PC</string>
-    <string name="pairing_verify_body">Check that this code matches the one Telepad shows on %1$s, under This PC on its Pair a phone page.</string>
+    <string name="pairing_verify_body">Check that this code matches the one Beckon shows on %1$s, under This PC on its Pair a phone page.</string>
     <string name="pairing_verify_warning">If it doesn’t, don’t continue: something else on the network may be answering.</string>
     <string name="pairing_matches">They match</string>
     <string name="pairing_connecting">Connecting…</string>
     <string name="pairing_changed_title">%1$s has a new identity</string>
-    <string name="pairing_changed_body">This PC was paired before, but it now answers with a different key. That happens if Telepad was reinstalled on it. It can also mean something else on the network is pretending to be it.</string>
-    <string name="pairing_changed_advice">Continue only if you reinstalled Telepad on this PC and this code matches the one it shows now.</string>
+    <string name="pairing_changed_body">This PC was paired before, but it now answers with a different key. That happens if Beckon was reinstalled on it. It can also mean something else on the network is pretending to be it.</string>
+    <string name="pairing_changed_advice">Continue only if you reinstalled Beckon on this PC and this code matches the one it shows now.</string>
     <string name="pairing_changed_continue">Trust the new key</string>
     <string name="pairing_not_paired_title">%1$s doesn’t know this phone yet</string>
-    <string name="pairing_not_paired_body">For safety a PC only accepts new phones that scan its QR code. On the PC, click the Telepad icon and choose Pair a phone, then scan the code and try again.</string>
+    <string name="pairing_not_paired_body">For safety a PC only accepts new phones that scan its QR code. On the PC, click the Beckon icon and choose Pair a phone, then scan the code and try again.</string>
     <string name="pairing_security_note">Pairing happens once. Everything sent afterwards is encrypted.</string>
 
     <!-- Add device -->
     <string name="add_title">Add a device</string>
     <string name="add_tab_address">Address</string>
     <string name="add_tab_bluetooth">Bluetooth</string>
-    <string name="add_address_hint">Telepad shows your PC’s address on its Pair a phone page, for example 192.168.1.20.</string>
+    <string name="add_address_hint">Beckon shows your PC’s address on its Pair a phone page, for example 192.168.1.20.</string>
     <string name="add_address_label">IP address</string>
     <string name="add_port_label">Port</string>
     <string name="add_connect">Connect</string>
@@ -133,7 +133,7 @@
     <string name="add_bt_open_settings">Open Bluetooth settings</string>
     <string name="add_bt_none">No paired Bluetooth devices yet.</string>
     <string name="add_bt_choose">Paired devices</string>
-    <string name="add_bt_permission_body">Allow Telepad to see your paired Bluetooth devices.</string>
+    <string name="add_bt_permission_body">Allow Beckon to see your paired Bluetooth devices.</string>
     <string name="add_bt_grant">Allow</string>
     <string name="add_bt_enable">Turn on Bluetooth</string>
     <string name="add_bt_unsupported">This phone can’t act as a Bluetooth keyboard.</string>
@@ -298,23 +298,23 @@
     <!-- Updates (Settings, About) -->
     <string name="updates_title">Updates</string>
     <string name="updates_check_automatically">Look for updates</string>
-    <string name="updates_check_automatically_subtitle">When the app opens, at most once a day. Telepad asks GitHub for the list of releases and sends nothing else.</string>
+    <string name="updates_check_automatically_subtitle">When the app opens, at most once a day. Beckon asks GitHub for the list of releases and sends nothing else.</string>
     <string name="updates_check">Check now</string>
     <string name="updates_checking">Looking for updates…</string>
-    <string name="updates_up_to_date">Telepad is up to date.</string>
-    <string name="updates_available">Telepad %1$s is available.</string>
+    <string name="updates_up_to_date">Beckon is up to date.</string>
+    <string name="updates_available">Beckon %1$s is available.</string>
     <string name="updates_whats_new">What changed</string>
     <string name="updates_install">Download and install</string>
     <string name="updates_retry">Try again</string>
-    <string name="updates_downloading">Downloading Telepad %1$s…</string>
-    <string name="updates_downloading_percent">Downloading Telepad %1$s… %2$d%%</string>
+    <string name="updates_downloading">Downloading Beckon %1$s…</string>
+    <string name="updates_downloading_percent">Downloading Beckon %1$s… %2$d%%</string>
     <string name="updates_installing">Android is installing the update. It may ask you to confirm.</string>
-    <string name="updates_needs_permission">Android has to allow Telepad to install apps first. Allow it on the next screen, come back, and tap Download and install again.</string>
+    <string name="updates_needs_permission">Android has to allow Beckon to install apps first. Allow it on the next screen, come back, and tap Download and install again.</string>
     <string name="updates_allow">Allow installing</string>
-    <string name="updates_from_store">This copy of Telepad came from %1$s, which keeps it up to date.</string>
+    <string name="updates_from_store">This copy of Beckon came from %1$s, which keeps it up to date.</string>
     <string name="updates_development_build">This is a development build. It does not update itself.</string>
-    <string name="updates_problem_offline">Telepad could not reach GitHub. Check the internet connection.</string>
-    <string name="updates_problem_rate_limited">GitHub is limiting how often Telepad may ask. Try again in an hour.</string>
+    <string name="updates_problem_offline">Beckon could not reach GitHub. Check the internet connection.</string>
+    <string name="updates_problem_rate_limited">GitHub is limiting how often Beckon may ask. Try again in an hour.</string>
     <string name="updates_problem_no_file">This release has no file for Android yet. Open the release page to see.</string>
     <string name="updates_problem_checksum">The download did not match its published checksum, so it was thrown away. Try again.</string>
     <string name="updates_problem_other">Something went wrong: %1$s</string>
@@ -326,7 +326,7 @@
     <string name="settings_about_subtitle">Version, license and links</string>
     <string name="settings_reset">Reset to defaults</string>
     <string name="settings_reset_title">Reset all settings?</string>
-    <string name="settings_reset_body">Touchpad, keyboard, connection and appearance settings go back to how they were when you installed Telepad. Paired PCs are not affected.</string>
+    <string name="settings_reset_body">Touchpad, keyboard, connection and appearance settings go back to how they were when you installed Beckon. Paired PCs are not affected.</string>
 
     <string name="touchpad_try_title">Try it here</string>
     <string name="touchpad_try_body">Nothing is sent to the PC from this pad.</string>
@@ -402,24 +402,24 @@
     <string name="about_issues">Report a problem or suggest something</string>
     <string name="about_license">Released under the MIT license.</string>
     <string name="about_libraries_title">Built with</string>
-    <string name="about_libraries">Telepad is built with open source libraries, such as Kotlin, Jetpack Compose, CameraX, ZXing and the Noise Protocol (noise-java). Thanks to all of their authors.</string>
+    <string name="about_libraries">Beckon is built with open source libraries, such as Kotlin, Jetpack Compose, CameraX, ZXing and the Noise Protocol (noise-java). Thanks to all of their authors.</string>
     <string name="about_licenses">Open-source licenses</string>
     <string name="about_privacy">Privacy: what you type stays on your network</string>
 
     <!-- Onboarding -->
     <string name="onboarding_welcome_title">Your phone, your PC’s trackpad</string>
     <string name="onboarding_welcome_body">Move the pointer, click, type and control media on your computer from here. Fast, private, no account.</string>
-    <string name="onboarding_install_title">Install Telepad on your PC</string>
+    <string name="onboarding_install_title">Install Beckon on your PC</string>
     <string name="onboarding_install_body">A small free app on your computer receives what you do on the phone. It runs on Windows, macOS and Linux.</string>
     <string name="onboarding_network_title">Same Wi‑Fi, then a quick check</string>
-    <string name="onboarding_network_body">Put both devices on the same network, then scan the QR code that Telepad shows on the PC. That one scan is what keeps strangers out.</string>
+    <string name="onboarding_network_body">Put both devices on the same network, then scan the QR code that Beckon shows on the PC. That one scan is what keeps strangers out.</string>
     <string name="onboarding_get_started">Get started</string>
-    <string name="onboarding_download">Get Telepad for PC</string>
+    <string name="onboarding_download">Get Beckon for PC</string>
     <string name="onboarding_page">Page %1$d of %2$d</string>
 
     <!-- Foreground service notification -->
-    <string name="notification_channel_name">Telepad connection</string>
-    <string name="notification_channel_description">Shown while Telepad stays connected to a PC in the background.</string>
+    <string name="notification_channel_name">Beckon connection</string>
+    <string name="notification_channel_description">Shown while Beckon stays connected to a PC in the background.</string>
     <string name="notification_title">Connected to %1$s</string>
     <string name="notification_text">Tap to open the remote</string>
     <string name="notification_disconnect">Disconnect</string>

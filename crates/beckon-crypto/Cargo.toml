@@ -1,0 +1,22 @@
+[package]
+name = "beckon-crypto"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+# Programs and libraries of this project only: nothing here is published to crates.io.
+publish = false
+
+[dependencies]
+beckon-protocol = { path = "../beckon-protocol" }
+thiserror.workspace = true
+snow.workspace = true
+sha2.workspace = true
+base64.workspace = true
+rand.workspace = true
+serde = { workspace = true }
+serde_json = { workspace = true }
+curve25519-dalek = { version = "4.1", default-features = false }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_Security_Cryptography", "Win32_Foundation", "Win32_System_Memory"] }

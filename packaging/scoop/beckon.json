@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0-alpha.4",
+    "description": "Use your Android phone as a trackpad, keyboard and media remote for this computer",
+    "homepage": "https://beckon.omsingh.me",
+    "license": "MIT",
+    "url": "https://github.com/omsingh02/beckon/releases/download/v2.0.0-alpha.4/beckon-v2.0.0-alpha.4-windows-x86_64.exe#/beckon.exe",
+    "hash": "60a6532fcfd5372ee7cf9d2f29d100a53510dac991850bd8e197dfdd1e6d4138",
+    "bin": "beckon.exe",
+    "shortcuts": [
+        [
+            "beckon.exe",
+            "Beckon"
+        ]
+    ],
+    "notes": "Beckon is in the tray. Click its icon, then \"Pair a phone...\", and scan the QR code with the Beckon app. \"Start at login\" is in its menu.",
+    "checkver": {
+        "github": "https://github.com/omsingh02/beckon",
+        "regex": "tag/v([\\d.]+(?:-[\\w.]+)?)"
+    },
+    "autoupdate": {
+        "url": "https://github.com/omsingh02/beckon/releases/download/v$version/beckon-v$version-windows-x86_64.exe#/beckon.exe"
+    }
+}

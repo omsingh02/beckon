@@ -1,7 +1,7 @@
-Telepad turns your phone into a wireless trackpad, keyboard and media remote for your Windows, Linux or Mac computer, over your Wi-Fi or over Bluetooth.
+Beckon turns your phone into a wireless trackpad, keyboard and media remote for your Windows, Linux or Mac computer, over your Wi-Fi or over Bluetooth.
 
 <b>Set up in a minute</b>
-Install Telepad on your computer (a small app that sits in the tray or menu bar and can start with the computer), open this app, tap Scan QR code and point the camera at the code on the computer's screen. That pairs the two. There is no account to make and nothing to type.
+Install Beckon on your computer (a small app that sits in the tray or menu bar and can start with the computer), open this app, tap Scan QR code and point the camera at the code on the computer's screen. That pairs the two. There is no account to make and nothing to type.
 
 <b>A trackpad that works like a laptop's</b>
 Move, tap, double-tap, drag, right-click, middle-click and scroll with momentum, with a scroll strip along the edge and mouse buttons that really hold.
@@ -15,5 +15,5 @@ Play, pause and volume, slide controls, and one-tap actions in the computer's ow
 <b>Private by design</b>
 Everything between your phone and your computer is encrypted end to end (the Noise protocol). The app has no account, no analytics, no ads and no tracking, and what you type goes only to your own computer. (The app asks GitHub once a day whether a newer version exists, and you can switch that off.) It is free and open source (MIT).
 
-<b>You need Telepad on the computer too</b>
-Get it for Windows, macOS and Linux at https://telepad-app.vercel.app. (Bluetooth mode needs nothing on the computer: the phone shows up as a Bluetooth keyboard and mouse.)
+<b>You need Beckon on the computer too</b>
+Get it for Windows, macOS and Linux at https://beckon.omsingh.me. (Bluetooth mode needs nothing on the computer: the phone shows up as a Bluetooth keyboard and mouse.)

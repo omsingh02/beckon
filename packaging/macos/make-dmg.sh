@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# Makes the macOS download: a disk image with Telepad.app and a shortcut to Applications to drag it onto.
+# Makes the macOS download: a disk image with Beckon.app and a shortcut to Applications to drag it onto.
 #
-#   packaging/macos/make-dmg.sh <name> <Telepad.app> <output-folder>
+#   packaging/macos/make-dmg.sh <name> <Beckon.app> <output-folder>
 #
-# <name> is what the download is called, such as telepad-v2.0.0-macos-universal; the image is <name>.dmg.
+# <name> is what the download is called, such as beckon-v2.0.0-macos-universal; the image is <name>.dmg.
 # Needs a Mac (hdiutil). Signing and notarizing is sign-and-notarize.sh's job, run on the app before this and on
 # the image after.
 set -euo pipefail
 
 if [ "$#" -ne 3 ]; then
-  echo "usage: $0 <name> <Telepad.app> <output-folder>" >&2
+  echo "usage: $0 <name> <Beckon.app> <output-folder>" >&2
   exit 2
 fi
 name="$1"
@@ -22,7 +22,7 @@ cleanup() { if [ -n "${stage:-}" ] && [ -d "$stage" ]; then rm -r -- "$stage"; f
 trap cleanup EXIT
 
 # ditto keeps what a signature depends on (attributes, links) that a plain copy may lose.
-ditto "$app" "$stage/Telepad.app"
+ditto "$app" "$stage/Beckon.app"
 ln -s /Applications "$stage/Applications"
 mkdir -p "$output"
 image="$output/$name.dmg"
@@ -30,7 +30,7 @@ rm -f -- "$image"
 
 # hdiutil sometimes fails with "Resource busy" on a busy build machine; a second try almost always works.
 for attempt in 1 2 3; do
-  if hdiutil create -volname "Telepad" -srcfolder "$stage" -ov -format UDZO "$image"; then
+  if hdiutil create -volname "Beckon" -srcfolder "$stage" -ov -format UDZO "$image"; then
     break
   fi
   if [ "$attempt" = 3 ]; then

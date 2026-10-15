@@ -1,0 +1,4 @@
+[Beckon]
+title=Beckon
+description=Use your phone as a trackpad and keyboard for this computer. Beckon listens on UDP port 5000 for the phone.
+ports=5000/udp

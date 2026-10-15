@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 # Makes the Linux packages: a .deb (Debian, Ubuntu, Mint...), an .rpm (Fedora, openSUSE...) and an Arch package.
 #
-#   packaging/linux/build-packages.sh <tag> <name-prefix> <telepad-binary> <output-folder>
+#   packaging/linux/build-packages.sh <tag> <name-prefix> <beckon-binary> <output-folder>
 #
-#   packaging/linux/build-packages.sh v2.0.0-alpha.2 telepad-v2.0.0-alpha.2-linux-x86_64 target/release/telepad dist
-#     writes dist/telepad-v2.0.0-alpha.2-linux-x86_64.deb, .rpm and .pkg.tar.zst
+#   packaging/linux/build-packages.sh v2.0.0-alpha.2 beckon-v2.0.0-alpha.2-linux-x86_64 target/release/beckon dist
+#     writes dist/beckon-v2.0.0-alpha.2-linux-x86_64.deb, .rpm and .pkg.tar.zst
 #
 # Needs nfpm on the PATH (a single program: https://github.com/goreleaser/nfpm/releases). Run it from anywhere.
 set -euo pipefail
 
 if [ "$#" -ne 4 ]; then
-  echo "usage: $0 <tag> <name-prefix> <telepad-binary> <output-folder>" >&2
+  echo "usage: $0 <tag> <name-prefix> <beckon-binary> <output-folder>" >&2
   exit 2
 fi
 tag="$1"

@@ -1,6 +1,6 @@
 ---
 name: Idea or feature request
-about: Something Telepad could do, or do better
+about: Something Beckon could do, or do better
 labels: enhancement
 ---
 

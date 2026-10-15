@@ -18,19 +18,19 @@ command -v curl > /dev/null 2>&1 || fail "the test container has no curl"
 echo "--- as root, piped into sh"
 cat /installer/install.sh | sh > /tmp/install.log 2>&1 || { cat /tmp/install.log; fail "the installer failed"; }
 cat /tmp/install.log
-[ "$(telepad --version)" = "telepad $expected" ] || fail "telepad --version says '$(telepad --version)', not 'telepad $expected'"
-[ -e /usr/lib/udev/rules.d/60-telepad-uinput.rules ] || fail "the system package did not put the udev rule in place"
+[ "$(beckon --version)" = "beckon $expected" ] || fail "beckon --version says '$(beckon --version)', not 'beckon $expected'"
+[ -e /usr/lib/udev/rules.d/60-beckon-uinput.rules ] || fail "the system package did not put the udev rule in place"
 grep -q "installed with\|Installing with" /tmp/install.log || fail "the installer did not say how it installed"
 cat /installer/install.sh | sh -s -- --uninstall > /tmp/uninstall.log 2>&1 || { cat /tmp/uninstall.log; fail "uninstalling failed"; }
-[ ! -e /usr/bin/telepad ] || fail "uninstalling left the program behind"
+[ ! -e /usr/bin/beckon ] || fail "uninstalling left the program behind"
 echo "ok: installed as a $kind package and removed again"
 
 echo "--- in a home folder (--user), no password"
 cat /installer/install.sh | sh -s -- --user > /tmp/user.log 2>&1 || { cat /tmp/user.log; fail "the --user install failed"; }
-[ "$("$HOME/.local/bin/telepad" --version)" = "telepad $expected" ] || fail "the program in ~/.local does not run"
-[ -e "$HOME/.local/share/applications/telepad.desktop" ] || fail "no applications-menu entry in ~/.local"
+[ "$("$HOME/.local/bin/beckon" --version)" = "beckon $expected" ] || fail "the program in ~/.local does not run"
+[ -e "$HOME/.local/share/applications/beckon.desktop" ] || fail "no applications-menu entry in ~/.local"
 cat /installer/install.sh | sh -s -- --uninstall > /tmp/user-uninstall.log 2>&1 || { cat /tmp/user-uninstall.log; fail "uninstalling the home-folder install failed"; }
-[ ! -e "$HOME/.local/bin/telepad" ] || fail "uninstalling left ~/.local/bin/telepad behind"
+[ ! -e "$HOME/.local/bin/beckon" ] || fail "uninstalling left ~/.local/bin/beckon behind"
 echo "ok: installed into ~/.local and removed again"
 
 # Someone who is not root, and asks for a password with sudo (here it never asks).
@@ -41,8 +41,8 @@ if [ "$kind" = deb ]; then
     cp /installer/install.sh /tmp/install-for-person.sh
     chmod 644 /tmp/install-for-person.sh
     su person -c 'cat /tmp/install-for-person.sh | sh' > /tmp/person.log 2>&1 || { cat /tmp/person.log; fail "the installer failed for an ordinary person"; }
-    [ "$(telepad --version)" = "telepad $expected" ] || fail "the program is not installed for the ordinary person's install"
+    [ "$(beckon --version)" = "beckon $expected" ] || fail "the program is not installed for the ordinary person's install"
     su person -c 'cat /tmp/install-for-person.sh | sh -s -- --uninstall' > /dev/null 2>&1
-    [ ! -e /usr/bin/telepad ] || fail "an ordinary person could not remove it"
+    [ ! -e /usr/bin/beckon ] || fail "an ordinary person could not remove it"
     echo "ok: sudo install and removal as an ordinary person"
 fi

@@ -60,7 +60,7 @@ representative at an online or offline event.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement by opening a
-[private report](https://github.com/omsingh02/telepad/security/advisories/new)
+[private report](https://github.com/omsingh02/beckon/security/advisories/new)
 (only the maintainers can see it), or by contacting the maintainer,
 [omsingh02](https://github.com/omsingh02), through GitHub. All complaints will
 be reviewed and investigated promptly and fairly.

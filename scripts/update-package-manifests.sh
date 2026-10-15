@@ -59,10 +59,10 @@ def rewrite(path, substitutions):
     file.write_text(text)
     print(f"updated {path}")
 
-linux = f"telepad-{tag}-linux-x86_64.tar.gz"
-windows_setup = f"telepad-{tag}-windows-x86_64-setup.exe"
-windows_exe = f"telepad-{tag}-windows-x86_64.exe"
-mac = f"telepad-{tag}-macos-universal.dmg"
+linux = f"beckon-{tag}-linux-x86_64.tar.gz"
+windows_setup = f"beckon-{tag}-windows-x86_64-setup.exe"
+windows_exe = f"beckon-{tag}-windows-x86_64.exe"
+mac = f"beckon-{tag}-macos-universal.dmg"
 
 rewrite("packaging/arch/PKGBUILD", [
     (r"^_tag=.*$", f"_tag={tag}"),
@@ -70,22 +70,22 @@ rewrite("packaging/arch/PKGBUILD", [
     (r"^pkgrel=.*$", "pkgrel=1"),
     (r"^sha256sums=\(.*\)$", f"sha256sums=('{digest(linux)}')"),
 ])
-rewrite("packaging/scoop/telepad.json", [
+rewrite("packaging/scoop/beckon.json", [
     (r'^(\s*)"version": ".*",$', rf'\g<1>"version": "{version}",'),
-    (r'^(\s*)"url": ".*",$', rf'\g<1>"url": "https://github.com/omsingh02/telepad/releases/download/{tag}/{windows_exe}#/telepad.exe",'),
+    (r'^(\s*)"url": ".*",$', rf'\g<1>"url": "https://github.com/omsingh02/beckon/releases/download/{tag}/{windows_exe}#/beckon.exe",'),
     (r'^(\s*)"hash": ".*",$', rf'\g<1>"hash": "{digest(windows_exe)}",'),
 ])
-for name in ("omsingh02.Telepad.yaml", "omsingh02.Telepad.installer.yaml", "omsingh02.Telepad.locale.en-US.yaml"):
+for name in ("omsingh02.Beckon.yaml", "omsingh02.Beckon.installer.yaml", "omsingh02.Beckon.locale.en-US.yaml"):
     subs = [(r"^PackageVersion: .*$", f"PackageVersion: {version}")]
     if name.endswith(".installer.yaml"):
         subs += [
-            (r"^(\s*InstallerUrl: ).*$", rf"\g<1>https://github.com/omsingh02/telepad/releases/download/{tag}/{windows_setup}"),
+            (r"^(\s*InstallerUrl: ).*$", rf"\g<1>https://github.com/omsingh02/beckon/releases/download/{tag}/{windows_setup}"),
             (r"^(\s*InstallerSha256: ).*$", rf"\g<1>{digest(windows_setup).upper()}"),
         ]
     if name.endswith(".locale.en-US.yaml"):
-        subs += [(r"^ReleaseNotesUrl: .*$", f"ReleaseNotesUrl: https://github.com/omsingh02/telepad/releases/tag/{tag}")]
+        subs += [(r"^ReleaseNotesUrl: .*$", f"ReleaseNotesUrl: https://github.com/omsingh02/beckon/releases/tag/{tag}")]
     rewrite(f"packaging/winget/{name}", subs)
-rewrite("packaging/homebrew/telepad.rb", [
+rewrite("packaging/homebrew/beckon.rb", [
     (r'^(\s*)version ".*"$', rf'\g<1>version "{version}"'),
     (r'^(\s*)sha256 ".*"$', rf'\g<1>sha256 "{digest(mac)}"'),
 ])

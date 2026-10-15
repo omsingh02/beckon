@@ -1,4 +1,4 @@
-# R8 / ProGuard rules for Telepad release builds.
+# R8 / ProGuard rules for Beckon release builds.
 #
 # Most libraries ship their own consumer rules (Compose, AndroidX, kotlinx.serialization,
 # Tink behind EncryptedSharedPreferences). Only what they cannot know about is here.
@@ -14,10 +14,10 @@
 
 # Keep the generated serializers of the app's own @Serializable classes.
 -keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
--keep,includedescriptorclasses class com.omsingh.telepad.**$$serializer { *; }
--keepclassmembers class com.omsingh.telepad.** {
+-keep,includedescriptorclasses class com.omsingh.beckon.**$$serializer { *; }
+-keepclassmembers class com.omsingh.beckon.** {
     *** Companion;
 }
--keepclasseswithmembers class com.omsingh.telepad.** {
+-keepclasseswithmembers class com.omsingh.beckon.** {
     kotlinx.serialization.KSerializer serializer(...);
 }

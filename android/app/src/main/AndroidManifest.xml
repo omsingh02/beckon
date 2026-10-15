@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Network: UDP to the PC. The internet is used for one thing: asking GitHub for the list of Telepad's
+    <!-- Network: UDP to the PC. The internet is used for one thing: asking GitHub for the list of Beckon's
          releases (and, when you tap Install, fetching one file), from Settings > About. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- Installing an update that Settings > About downloaded, when you tap Install. Android asks you to allow
-         it for Telepad separately, and checks that the new file is signed with the same key as this app. -->
+         it for Beckon separately, and checks that the new file is signed with the same key as this app. -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <!-- Staying connected in the background (optional, off by default). -->
@@ -40,7 +40,7 @@
     <uses-feature android:name="android.hardware.camera.any" android:required="false" />
 
     <application
-        android:name=".TelepadApp"
+        android:name=".BeckonApp"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -48,7 +48,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Telepad.Starting"
+        android:theme="@style/Theme.Beckon.Starting"
         tools:targetApi="34">
 
         <activity
@@ -61,18 +61,18 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- The link in a pairing QR code (telepad://pair?...): a camera app that opens links, or
+            <!-- The link in a pairing QR code (beckon://pair?...): a camera app that opens links, or
                  a message with the link in it, takes the phone straight to pairing. -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="telepad" android:host="pair" />
+                <data android:scheme="beckon" android:host="pair" />
             </intent-filter>
         </activity>
 
         <service
-            android:name=".service.TelepadConnectionService"
+            android:name=".service.BeckonConnectionService"
             android:exported="false"
             android:foregroundServiceType="connectedDevice" />
 

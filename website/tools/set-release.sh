@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 tag = sys.argv[1]
-repo = "https://github.com/omsingh02/telepad/releases"
+repo = "https://github.com/omsingh02/beckon/releases"
 target = f"{repo}/latest/download/" if tag == "latest" else f"{repo}/download/{tag}/"
 path = Path("website/index.html")
 text, count = re.subn(re.escape(repo) + r"/(?:latest/download/|download/[^/\"]+/)", target, path.read_text(encoding="utf-8"))

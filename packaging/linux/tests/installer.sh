@@ -44,10 +44,10 @@ make_release() {  # make_release <tag>
 }
 listing() {  # listing tag ... as the releases feed lists them, newest first
   local tag
-  printf '<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom">\n<title>Release notes from telepad</title>\n'
+  printf '<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom">\n<title>Release notes from beckon</title>\n'
   for tag in "$@"; do
     # The notes carry a link to another release, escaped as GitHub writes it: it must not count as a release.
-    printf '<entry>\n<id>tag:github.com,2008:Repository/1/%s</id>\n<link rel="alternate" type="text/html" href="https://github.com/omsingh02/telepad/releases/tag/%s"/>\n<title>Telepad %s</title>\n<content type="html">&lt;a href=&quot;https://github.com/omsingh02/telepad/releases/tag/v9.9.9&quot;&gt;x&lt;/a&gt;</content>\n</entry>\n' "$tag" "$tag" "$tag"
+    printf '<entry>\n<id>tag:github.com,2008:Repository/1/%s</id>\n<link rel="alternate" type="text/html" href="https://github.com/omsingh02/beckon/releases/tag/%s"/>\n<title>Beckon %s</title>\n<content type="html">&lt;a href=&quot;https://github.com/omsingh02/beckon/releases/tag/v9.9.9&quot;&gt;x&lt;/a&gt;</content>\n</entry>\n' "$tag" "$tag" "$tag"
   done
   printf '</feed>\n'
 }
@@ -70,7 +70,7 @@ failed=0
 try() {  # try <image> <kind>
   echo "=== $1"
   if docker run --rm --network host \
-      -e TELEPAD_FEED="http://127.0.0.1:$port/feed.atom" -e TELEPAD_DOWNLOADS="http://127.0.0.1:$port/download" \
+      -e BECKON_FEED="http://127.0.0.1:$port/feed.atom" -e BECKON_DOWNLOADS="http://127.0.0.1:$port/download" \
       --mount "type=bind,source=$repo/website/install.sh,target=/installer/install.sh,readonly" \
       --mount "type=bind,source=$here/container-installer.sh,target=/test.sh,readonly" \
       "$1" sh /test.sh "$version" "$2"; then :; else
@@ -91,10 +91,10 @@ if [ "$stable" != "$tag" ]; then
   listing "v${base}-rc.9" "$stable" "$tag" > "$site/feed.atom"
   echo "=== which release is picked when there is a stable one"
   picked="$(docker run --rm --network host \
-      -e TELEPAD_FEED="http://127.0.0.1:$port/feed.atom" -e TELEPAD_DOWNLOADS="http://127.0.0.1:$port/download" \
+      -e BECKON_FEED="http://127.0.0.1:$port/feed.atom" -e BECKON_DOWNLOADS="http://127.0.0.1:$port/download" \
       --mount "type=bind,source=$repo/website/install.sh,target=/installer/install.sh,readonly" debian:12 \
-      sh -c 'apt-get update -qq > /dev/null; apt-get install -y -qq curl ca-certificates > /dev/null 2>&1; sh /installer/install.sh --user 2>&1 | grep -o "Telepad [0-9.]* for Linux" | head -n 1')"
+      sh -c 'apt-get update -qq > /dev/null; apt-get install -y -qq curl ca-certificates > /dev/null 2>&1; sh /installer/install.sh --user 2>&1 | grep -o "Beckon [0-9.]* for Linux" | head -n 1')"
   echo "picked: $picked"
-  [ "$picked" = "Telepad $base for Linux" ] || { echo "FAILED: expected the stable release" >&2; failed=1; }
+  [ "$picked" = "Beckon $base for Linux" ] || { echo "FAILED: expected the stable release" >&2; failed=1; }
 fi
 exit "$failed"

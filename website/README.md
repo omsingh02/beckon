@@ -1,4 +1,4 @@
-# The Telepad website
+# The Beckon website
 
 A single static page: plain HTML, CSS and a little JavaScript. No framework, no build step, and nothing is loaded from other sites (the fonts are served from here too), which is also what the Content Security Policy in `vercel.json` enforces.
 
@@ -24,15 +24,15 @@ docs/brand/export.sh                     # rebuild the icons and the social imag
 
 `serve.py` sends the production Content Security Policy, so an inline style or a script from another site shows up in the browser's console while you work, not after a deploy. Nothing else needs installing.
 
-Keep the copy honest: say only what the app and the server do today. Download buttons point at `releases/latest/download/<name>`, and the release workflow publishes those version-less names (`telepad-android.apk`, `telepad-windows-x86_64-setup.exe`, `telepad-windows-x86_64.exe`, `telepad-macos-universal.dmg`, `telepad-linux-x86_64.tar.gz`, and the console servers `telepad-server-*`).
+Keep the copy honest: say only what the app and the server do today. Download buttons point at `releases/latest/download/<name>`, and the release workflow publishes those version-less names (`beckon-android.apk`, `beckon-windows-x86_64-setup.exe`, `beckon-windows-x86_64.exe`, `beckon-macos-universal.dmg`, `beckon-linux-x86_64.tar.gz`, and the console servers `beckon-server-*`).
 
 ## Deploying
 
-The site is a Vercel project named `telepad-app` (its address is `https://telepad-app.vercel.app`). It is connected to this repository, so **a push to `main` that changes `website/` deploys it**, and a pull request that changes it gets a preview. Pushes that only touch the app or the server build nothing.
+The site is a Vercel project named `telepad-app` (formerly its public address, `https://telepad-app.vercel.app`, which now redirects to `https://beckon.omsingh.me`; `vercel.json` has the host-based redirect, currently temporary (307) until the new domain is confirmed working, then set `"permanent": true`). It is connected to this repository, so **a push to `main` that changes `website/` deploys it**, and a pull request that changes it gets a preview. Pushes that only touch the app or the server build nothing.
 
 The project is set up as follows (Vercel dashboard, Project → Settings):
 
-- *Git*: connected to `omsingh02/telepad`, production branch `main`.
+- *Git*: connected to `omsingh02/beckon`, production branch `main`.
 - *Root Directory*: `website`.
 - *Ignored Build Step*: builds only when `website/` has changed, so code changes and dependency updates do not use up the free plan's 100 deployments a day. It skips branches named `dependabot/*` and commits by Dependabot, and any push that changes nothing under `website/` since the last successful deployment (or since the previous commit, when there is none). If git cannot tell, for example because that last commit is not in Vercel's shallow clone, it builds. Exit code 0 means "skip", anything else means "build"; a skipped build is not a failure:
   `case "$VERCEL_GIT_COMMIT_REF" in dependabot/*) exit 0;; esac; [ "$VERCEL_GIT_COMMIT_AUTHOR_LOGIN" = "dependabot[bot]" ] && exit 0; git diff --quiet "${VERCEL_GIT_PREVIOUS_SHA:-HEAD^}" HEAD -- ":/website" && exit 0; exit 1`
@@ -42,6 +42,6 @@ Because the Root Directory is set, `vercel deploy` has to be run from the reposi
 
 ### A custom domain
 
-1. Add the domain to the project: `vercel domains add telepad.example.org`, and create the DNS record Vercel asks for.
-2. Point the page's own links at it: `website/tools/set-url.sh https://telepad.example.org`
-3. Commit and push (Vercel deploys from the push), and update the repository's homepage: `gh repo edit --homepage https://telepad.example.org`
+1. Add the domain to the project: `vercel domains add beckon.example.org`, and create the DNS record Vercel asks for.
+2. Point the page's own links at it: `website/tools/set-url.sh https://beckon.example.org`
+3. Commit and push (Vercel deploys from the push), and update the repository's homepage: `gh repo edit --homepage https://beckon.example.org`

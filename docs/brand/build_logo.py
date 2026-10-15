@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Generates the Telepad logo files: icon.svg, logo.svg and logo-dark.svg.
+"""Generates the Beckon logo files: icon.svg, logo.svg and logo-dark.svg.
 
 The icon is the Android launcher icon (android/app/src/main/res/drawable/ic_launcher_*.xml)
-drawn as SVG. The wordmark is the word "Telepad" set in Cal Sans and converted to outlines,
+drawn as SVG. The wordmark is the word "Beckon" set in Cal Sans and converted to outlines,
 so the logo looks the same everywhere and needs no font. Cal Sans is licensed under the SIL
 Open Font License 1.1, which allows this.
 
@@ -18,7 +18,7 @@ from fontTools.ttLib import TTFont
 
 OUT = Path(__file__).resolve().parent
 FONT = Path(sys.argv[1] if len(sys.argv) > 1 else "/usr/share/fonts/CalSans-Regular.ttf")
-WORD = "Telepad"
+WORD = "Beckon"
 
 NAVY = "#0B1220"
 INK_ON_DARK = "#F1F5F9"
@@ -53,8 +53,8 @@ ICON_BODY = """\
 
 def icon_svg():
     return (
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512" role="img" aria-label="Telepad">\n'
-        "  <title>Telepad</title>\n" + ICON_BODY + "</svg>\n"
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512" role="img" aria-label="Beckon">\n'
+        "  <title>Beckon</title>\n" + ICON_BODY + "</svg>\n"
     )
 
 
@@ -119,8 +119,8 @@ def logo_svg(font, ink):
     total = text_x + width * scale
 
     return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {total:.1f} 108" width="{total * 2:.0f}" height="216" role="img" aria-label="Telepad">\n'
-        "  <title>Telepad</title>\n"
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {total:.1f} 108" width="{total * 2:.0f}" height="216" role="img" aria-label="Beckon">\n'
+        "  <title>Beckon</title>\n"
         + ICON_BODY.replace("tp-", "lg-")
         + f'  <path transform="translate({text_x} {baseline:.2f}) scale({scale:.5f})" fill="{ink}" d="{path}"/>\n'
         "</svg>\n"

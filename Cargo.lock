@@ -195,6 +195,109 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ac07cdecf99051d9a5238b80f35af32cdeba5b336e55d957b318b50137e18da5"
 
 [[package]]
+name = "beckon-crypto"
+version = "2.0.0"
+dependencies = [
+ "base64",
+ "beckon-protocol",
+ "curve25519-dalek",
+ "rand",
+ "serde",
+ "serde_json",
+ "sha2 0.11.0",
+ "snow",
+ "thiserror 2.0.21",
+ "windows-sys 0.59.0",
+]
+
+[[package]]
+name = "beckon-platform"
+version = "2.0.0"
+dependencies = [
+ "arboard",
+ "beckon-protocol",
+ "dirs",
+ "if-addrs",
+ "libc",
+ "nix",
+ "objc2-app-kit",
+ "objc2-core-foundation",
+ "objc2-core-graphics",
+ "thiserror 2.0.21",
+ "tracing",
+ "windows-sys 0.59.0",
+]
+
+[[package]]
+name = "beckon-protocol"
+version = "2.0.0"
+dependencies = [
+ "bytes",
+ "serde",
+ "thiserror 2.0.21",
+]
+
+[[package]]
+name = "beckon-server"
+version = "2.0.0"
+dependencies = [
+ "base64",
+ "beckon-crypto",
+ "beckon-platform",
+ "beckon-protocol",
+ "bytes",
+ "clap",
+ "hostname",
+ "qrcode",
+ "rand",
+ "socket2",
+ "thiserror 2.0.21",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "beckon-tray"
+version = "2.0.0"
+dependencies = [
+ "base64",
+ "beckon-crypto",
+ "beckon-platform",
+ "beckon-protocol",
+ "beckon-server",
+ "beckon-update",
+ "clap",
+ "hostname",
+ "ksni",
+ "objc2-core-foundation",
+ "open",
+ "qrcode",
+ "tao",
+ "tiny_http",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+ "tray-icon",
+ "windows-sys 0.59.0",
+ "winresource",
+]
+
+[[package]]
+name = "beckon-update"
+version = "2.0.0"
+dependencies = [
+ "beckon-protocol",
+ "libc",
+ "serde",
+ "serde_json",
+ "sha2 0.11.0",
+ "thiserror 2.0.21",
+ "tracing",
+ "ureq",
+]
+
+[[package]]
 name = "bitflags"
 version = "2.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2577,109 +2680,6 @@ name = "target-lexicon"
 version = "0.12.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "61c41af27dd6d1e27b1b16b489db798443478cef1f06a660c96db617ba5de3b1"
-
-[[package]]
-name = "telepad-crypto"
-version = "2.0.0"
-dependencies = [
- "base64",
- "curve25519-dalek",
- "rand",
- "serde",
- "serde_json",
- "sha2 0.11.0",
- "snow",
- "telepad-protocol",
- "thiserror 2.0.21",
- "windows-sys 0.59.0",
-]
-
-[[package]]
-name = "telepad-platform"
-version = "2.0.0"
-dependencies = [
- "arboard",
- "dirs",
- "if-addrs",
- "libc",
- "nix",
- "objc2-app-kit",
- "objc2-core-foundation",
- "objc2-core-graphics",
- "telepad-protocol",
- "thiserror 2.0.21",
- "tracing",
- "windows-sys 0.59.0",
-]
-
-[[package]]
-name = "telepad-protocol"
-version = "2.0.0"
-dependencies = [
- "bytes",
- "serde",
- "thiserror 2.0.21",
-]
-
-[[package]]
-name = "telepad-server"
-version = "2.0.0"
-dependencies = [
- "base64",
- "bytes",
- "clap",
- "hostname",
- "qrcode",
- "rand",
- "socket2",
- "telepad-crypto",
- "telepad-platform",
- "telepad-protocol",
- "thiserror 2.0.21",
- "tokio",
- "tracing",
- "tracing-subscriber",
-]
-
-[[package]]
-name = "telepad-tray"
-version = "2.0.0"
-dependencies = [
- "base64",
- "clap",
- "hostname",
- "ksni",
- "objc2-core-foundation",
- "open",
- "qrcode",
- "tao",
- "telepad-crypto",
- "telepad-platform",
- "telepad-protocol",
- "telepad-server",
- "telepad-update",
- "tiny_http",
- "tokio",
- "tracing",
- "tracing-subscriber",
- "tray-icon",
- "windows-sys 0.59.0",
- "winresource",
-]
-
-[[package]]
-name = "telepad-update"
-version = "2.0.0"
-dependencies = [
- "libc",
- "serde",
- "serde_json",
- "sha2 0.11.0",
- "telepad-protocol",
- "thiserror 2.0.21",
- "tracing",
- "ureq",
-]
 
 [[package]]
 name = "tempfile"

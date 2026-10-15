@@ -2,7 +2,7 @@
 # Points the website's canonical link, Open Graph tags, sitemap and robots.txt, and the README's
 # "Website" link, at a new address (for example after adding a custom domain in Vercel).
 #
-#   website/tools/set-url.sh https://telepad.example.org
+#   website/tools/set-url.sh https://beckon.example.org
 #
 # It changes files only; commit them and deploy afterwards.
 set -euo pipefail

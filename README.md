@@ -2,19 +2,19 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/brand/logo-dark.svg">
-  <img src="docs/brand/logo.svg" alt="Telepad" width="300">
+  <img src="docs/brand/logo.svg" alt="Beckon" width="300">
 </picture>
 
 **Your phone as a trackpad and keyboard for your computer.**
 
 Windows, Linux and macOS, over Wi-Fi or Bluetooth. Open source, end-to-end encrypted, no account.
 
-[**Website**](https://telepad-app.vercel.app) •
-[**Download**](https://github.com/omsingh02/telepad/releases) •
+[**Website**](https://beckon.omsingh.me) •
+[**Download**](https://github.com/omsingh02/beckon/releases) •
 [Changelog](CHANGELOG.md)
 
-[![CI Status](https://github.com/omsingh02/telepad/actions/workflows/ci.yml/badge.svg)](https://github.com/omsingh02/telepad/actions/workflows/ci.yml)
-[![Latest Release](https://img.shields.io/github/v/release/omsingh02/telepad?include_prereleases&color=blue&label=release)](https://github.com/omsingh02/telepad/releases/latest)
+[![CI Status](https://github.com/omsingh02/beckon/actions/workflows/ci.yml/badge.svg)](https://github.com/omsingh02/beckon/actions/workflows/ci.yml)
+[![Latest Release](https://img.shields.io/github/v/release/omsingh02/beckon?include_prereleases&color=blue&label=release)](https://github.com/omsingh02/beckon/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Rust stable](https://img.shields.io/badge/rust-stable-orange.svg)](https://www.rust-lang.org/)
 [![Android API 28+](https://img.shields.io/badge/android-API%2028%2B-green.svg)](https://developer.android.com)
@@ -43,9 +43,9 @@ Windows, Linux and macOS, over Wi-Fi or Bluetooth. Open source, end-to-end encry
 
 ## Overview
 
-Telepad consists of two components:
+Beckon consists of two components:
 1. **Android Client** (Kotlin / Jetpack Compose): turns touches, key presses and button taps into mouse, keyboard and media input, and sends them over encrypted UDP or Bluetooth.
-2. **Desktop app** (Rust): it sits in the tray (the menu bar on a Mac) and starts when you sign in. It shows the QR code you pair a phone with, receives the packets, decrypts them, and injects mouse and keyboard events into the desktop through the native input API of each platform: Win32 `SendInput` on Windows, `/dev/uinput` on Linux, and CoreGraphics on macOS. The same server is also available as `telepad-server`, a console program for PCs without a desktop and for people who like a terminal.
+2. **Desktop app** (Rust): it sits in the tray (the menu bar on a Mac) and starts when you sign in. It shows the QR code you pair a phone with, receives the packets, decrypts them, and injects mouse and keyboard events into the desktop through the native input API of each platform: Win32 `SendInput` on Windows, `/dev/uinput` on Linux, and CoreGraphics on macOS. The same server is also available as `beckon-server`, a console program for PCs without a desktop and for people who like a terminal.
 
 ### Connection Modes
 
@@ -65,17 +65,17 @@ Telepad consists of two components:
 
 ## Downloads
 
-Pre-built files are under [**Releases**](https://github.com/omsingh02/telepad/releases). Pick the one for each of your devices:
+Pre-built files are under [**Releases**](https://github.com/omsingh02/beckon/releases). Pick the one for each of your devices:
 
 | For | Platform | File |
 | :--- | :--- | :--- |
-| **Your phone** | Android 9.0+ (API 28+) | `telepad-android.apk` |
-| **Your PC** | Windows 10 / 11 (x86_64) | `telepad-windows-x86_64-setup.exe` (installer), or `telepad-windows-x86_64.exe` to run without installing |
-| **Your PC** | macOS 11+ (Apple silicon and Intel) | `telepad-macos-universal.dmg` |
-| **Your PC** | Linux (x86_64, glibc 2.34+) | `curl -fsSL https://telepad-app.vercel.app/install.sh \| sh`, or `telepad-linux-x86_64.deb` (Debian, Ubuntu, Mint), `.rpm` (Fedora, openSUSE), `.pkg.tar.zst` (Arch) or `.tar.gz` (then `./install.sh`) |
-| *Console server* | any of the above, no tray | `telepad-server-windows-x86_64.exe` (or `.zip`), `telepad-server-linux-x86_64.tar.gz`, `telepad-server-macos-universal.tar.gz` |
+| **Your phone** | Android 9.0+ (API 28+) | `beckon-android.apk` |
+| **Your PC** | Windows 10 / 11 (x86_64) | `beckon-windows-x86_64-setup.exe` (installer), or `beckon-windows-x86_64.exe` to run without installing |
+| **Your PC** | macOS 11+ (Apple silicon and Intel) | `beckon-macos-universal.dmg` |
+| **Your PC** | Linux (x86_64, glibc 2.34+) | `curl -fsSL https://beckon.omsingh.me/install.sh \| sh`, or `beckon-linux-x86_64.deb` (Debian, Ubuntu, Mint), `.rpm` (Fedora, openSUSE), `.pkg.tar.zst` (Arch) or `.tar.gz` (then `./install.sh`) |
+| *Console server* | any of the above, no tray | `beckon-server-windows-x86_64.exe` (or `.zip`), `beckon-server-linux-x86_64.tar.gz`, `beckon-server-macos-universal.tar.gz` |
 
-Every file is also published with the version in its name (for example `telepad-android-v2.0.0.apk`). All of them are listed with their SHA-256 in `SHA256SUMS`, and each one has a [build attestation](#checking-a-download): a signed statement of which build, from which commit, produced it.
+Every file is also published with the version in its name (for example `beckon-android-v2.0.0.apk`). All of them are listed with their SHA-256 in `SHA256SUMS`, and each one has a [build attestation](#checking-a-download): a signed statement of which build, from which commit, produced it.
 
 **Your system may warn you the first time.** Builds are not code-signed yet (see [docs/code-signing.md](docs/code-signing.md)), so Windows shows *Windows protected your PC* (choose **More info**, then **Run anyway**), macOS says it cannot verify the app (**System Settings → Privacy & Security → Open Anyway**), and Android asks to allow installs from your browser or file manager. The warnings go away as signing is set up; until then, [check the download](#checking-a-download) if you want to be sure.
 
@@ -83,25 +83,25 @@ Every file is also published with the version in its name (for example `telepad-
 
 ```bash
 sha256sum -c SHA256SUMS --ignore-missing                       # the file is the one that was published
-gh attestation verify telepad-android.apk --repo omsingh02/telepad   # and GitHub built it from this repository
+gh attestation verify beckon-android.apk --repo omsingh02/beckon   # and GitHub built it from this repository
 ```
 
 ### Updates
 
-Telepad looks for a newer version when it starts and then once a day (the desktop app and the phone app each do), and says so: the tray menu offers **Update to 2.0.0-alpha.5…**, the page has a notice with an **Install and restart** button, and on the phone **Settings → About** shows the version with a dot on Settings. Nothing is installed until you press the button. It is one request for GitHub's public list of releases, which carries no identifier (see [PRIVACY.md](PRIVACY.md)); switch it off with *Looks for updates: off* in the page's footer or *Look for updates* in **Settings → About**, and use **Check for updates** whenever you like.
+Beckon looks for a newer version when it starts and then once a day (the desktop app and the phone app each do), and says so: the tray menu offers **Update to 2.0.0-alpha.5…**, the page has a notice with an **Install and restart** button, and on the phone **Settings → About** shows the version with a dot on Settings. Nothing is installed until you press the button. It is one request for GitHub's public list of releases, which carries no identifier (see [PRIVACY.md](PRIVACY.md)); switch it off with *Looks for updates: off* in the page's footer or *Look for updates* in **Settings → About**, and use **Check for updates** whenever you like.
 
 What *Install* does depends on how that copy was installed. In every case the file is downloaded from the release and its SHA-256 is checked against the release's `SHA256SUMS` first; a file that does not match is thrown away.
 
 | Copy | What happens |
 | :--- | :--- |
-| Windows installer | Runs the new installer quietly (no administrator prompt), which quits Telepad, replaces it and starts it again. *Start at login* stays as you had it. |
-| macOS app | Opens the disk image, swaps the app in `/Applications` for the new one and starts it. (Until the app is notarized, macOS asks for the Accessibility permission again; Telepad says so.) |
-| Linux package | Asks your system for your password (the usual `pkexec` prompt), installs the matching `.deb`, `.rpm` or Arch package with your package manager, and starts Telepad again. If your system cannot ask, the page shows the one `sudo` command to run. |
+| Windows installer | Runs the new installer quietly (no administrator prompt), which quits Beckon, replaces it and starts it again. *Start at login* stays as you had it. |
+| macOS app | Opens the disk image, swaps the app in `/Applications` for the new one and starts it. (Until the app is notarized, macOS asks for the Accessibility permission again; Beckon says so.) |
+| Linux package | Asks your system for your password (the usual `pkexec` prompt), installs the matching `.deb`, `.rpm` or Arch package with your package manager, and starts Beckon again. If your system cannot ask, the page shows the one `sudo` command to run. |
 | Linux tarball in `~/.local` | Replaces the program file and starts it again; no password. |
-| Phone (Android) | Downloads the APK and hands it to Android's installer (Android asks you to allow Telepad to install apps once, and may ask you to confirm; it refuses an APK that is not signed with the same key). A copy installed by Google Play, F-Droid, Obtainium or another store is updated by that store, and Telepad only tells you. |
-| Anything else (Homebrew, a build from source, a program run from the Downloads folder) | Telepad tells you there is a new version and where to get it. |
+| Phone (Android) | Downloads the APK and hands it to Android's installer (Android asks you to allow Beckon to install apps once, and may ask you to confirm; it refuses an APK that is not signed with the same key). A copy installed by Google Play, F-Droid, Obtainium or another store is updated by that store, and Beckon only tells you. |
+| Anything else (Homebrew, a build from source, a program run from the Downloads folder) | Beckon tells you there is a new version and where to get it. |
 
-You can still update by hand: the Windows installer and `install.sh` replace the running copy, on Linux the one command above (or `sudo apt install ./telepad-….deb`, `sudo dnf install ./telepad-….rpm`, `sudo pacman -U telepad-….pkg.tar.zst`) upgrades it, and the phone app updates in place. To have the phone app updated by an update manager instead, add this repository to [Obtainium](https://obtainium.imranr.dev) (**Add app**, paste `https://github.com/omsingh02/telepad`, and turn on *Include prereleases* while the releases are alphas). Settings and paired phones are kept across updates. People on a final release are offered final releases only; people on an alpha are offered the next alpha and the final release. `telepad --check-update` looks and says what it found, without installing.
+You can still update by hand: the Windows installer and `install.sh` replace the running copy, on Linux the one command above (or `sudo apt install ./beckon-….deb`, `sudo dnf install ./beckon-….rpm`, `sudo pacman -U beckon-….pkg.tar.zst`) upgrades it, and the phone app updates in place. To have the phone app updated by an update manager instead, add this repository to [Obtainium](https://obtainium.imranr.dev) (**Add app**, paste `https://github.com/omsingh02/beckon`, and turn on *Include prereleases* while the releases are alphas). Settings and paired phones are kept across updates. People on a final release are offered final releases only; people on an alpha are offered the next alpha and the final release. `beckon --check-update` looks and says what it found, without installing.
 
 ### Platform support
 
@@ -114,7 +114,7 @@ You can still update by hand: the Windows installer and `install.sh` replace the
 | Automatic discovery | ✅ | ✅ | ✅ |
 | Now Playing metadata | ❌ ³ | ❌ ³ | ❌ ³ |
 
-¹ Built and unit-tested on every CI run, but injecting real input needs a desktop session that CI does not have. On Windows it is checked by an `#[ignore]`d test you can run by hand (`cargo test -p telepad-platform --test windows_send_input -- --ignored`); the macOS backend has not yet been exercised on a physical Mac. Please report anything that misbehaves. (The Linux backend is checked against a real virtual input device whenever `/dev/uinput` can be opened.)
+¹ Built and unit-tested on every CI run, but injecting real input needs a desktop session that CI does not have. On Windows it is checked by an `#[ignore]`d test you can run by hand (`cargo test -p beckon-platform --test windows_send_input -- --ignored`); the macOS backend has not yet been exercised on a physical Mac. Please report anything that misbehaves. (The Linux backend is checked against a real virtual input device whenever `/dev/uinput` can be opened.)
 ² Desktop environments differ here; see [Linux notes](#linux). Wayland and X11 both work.
 ³ Now Playing is not implemented in the Rust server yet, so the app does not show the card (the server tells the app what it supports).
 
@@ -186,7 +186,7 @@ A Bluetooth keyboard can only send key presses, so over Bluetooth: typing works 
 
 ## Protocol & Architecture
 
-Telepad uses a custom compact binary protocol over UDP.
+Beckon uses a custom compact binary protocol over UDP.
 
 ```
 +---------------------------------------------------------------------------------+
@@ -262,7 +262,7 @@ Telepad uses a custom compact binary protocol over UDP.
   - `0x80`: ClipboardData (`[u16 len][utf-8 bytes]`)
   - `0x81`: NowPlaying (`[flags][pos: i64][dur: i64][strings...]`)
   - `0x82`: HostInfo (`[os: u8][capabilities: u8][major][minor][patch]`; `os` is 1 Windows, 2 macOS, 3 Linux; capabilities are `0x01` now-playing and `0x02` clipboard; later versions may append fields, which readers ignore)
-- **Pairing by QR code**: the PC's QR code holds a link, `telepad://pair?...`, which the app also opens when something else (a camera app, a message) hands it over.
+- **Pairing by QR code**: the PC's QR code holds a link, `beckon://pair?...`, which the app also opens when something else (a camera app, a message) hands it over.
 
   | Field | Meaning |
   | :--- | :--- |
@@ -277,16 +277,16 @@ Telepad uses a custom compact binary protocol over UDP.
 - **Fingerprint Calculation**:
   - `SHA256(server_static_public_key)[0..10]` formatted as five groups of four hex digits: `XXXX · XXXX · XXXX · XXXX · XXXX` (80 bits). The key is not secret, so an impostor can search in advance for a key with a matching fingerprint; 80 bits puts that out of reach (the 48 bits of earlier versions did not). The first three groups equal the shorter fingerprint older versions showed.
 - **Key Storage**:
-  - Windows: `%APPDATA%\Telepad\identity.key` (DPAPI-protected) and `trusted_clients.json`.
-  - macOS: `~/Library/Application Support/Telepad/`.
-  - Linux: `$XDG_CONFIG_HOME/telepad/` (default `~/.config/telepad/`); `identity.key` is readable only by you.
+  - Windows: `%APPDATA%\Beckon\identity.key` (DPAPI-protected) and `trusted_clients.json`.
+  - macOS: `~/Library/Application Support/Beckon/`.
+  - Linux: `$XDG_CONFIG_HOME/beckon/` (default `~/.config/beckon/`); `identity.key` is readable only by you.
   - Override with `--key-dir`.
   - Android: `EncryptedSharedPreferences` backed by Android Keystore. A PC is identified by its public key, not its address, so a PC that gets a new IP is still the same PC.
 
 ### Android app structure
 
 ```
-com.omsingh.telepad
+com.omsingh.beckon
 ├── core/            logic with no UI: the pieces below are plain Kotlin and unit-tested
 │   ├── input/       gesture engine, keyboard session (sticky modifiers), text diffing, HID codes
 │   ├── host/        what the PC runs: key names and shortcuts per OS, host-info messages
@@ -308,20 +308,20 @@ The network code is tested end to end against a stand-in PC that speaks the real
 
 ### Wi-Fi Mode
 
-1. **Install Telepad on your PC** and open it:
-   - **Windows:** run `telepad-windows-x86_64-setup.exe`. It installs for you only (no administrator prompt), adds Telepad to the Start menu, and offers to start it when you sign in.
-   - **macOS:** open `telepad-macos-universal.dmg` and drag **Telepad** onto **Applications**, then open it. Allow the Accessibility request: without it macOS discards what the phone types and clicks.
-   - **Linux:** run one command, then open Telepad from your applications menu:
+1. **Install Beckon on your PC** and open it:
+   - **Windows:** run `beckon-windows-x86_64-setup.exe`. It installs for you only (no administrator prompt), adds Beckon to the Start menu, and offers to start it when you sign in.
+   - **macOS:** open `beckon-macos-universal.dmg` and drag **Beckon** onto **Applications**, then open it. Allow the Accessibility request: without it macOS discards what the phone types and clicks.
+   - **Linux:** run one command, then open Beckon from your applications menu:
      ```bash
-     curl -fsSL https://telepad-app.vercel.app/install.sh | sh
+     curl -fsSL https://beckon.omsingh.me/install.sh | sh
      ```
-     It picks the right package for your system (a `.deb` on Debian, Ubuntu and Mint; an `.rpm` on Fedora and openSUSE; an Arch package on Arch and Manjaro; anywhere else it unpacks into your home folder), checks the download against the release's checksums, and sets up the permission Telepad needs to type, so there is nothing else to do. It says what it will do first and asks for your password only to install a system package. Prefer to download the file yourself? Every package is on the [releases page](https://github.com/omsingh02/telepad/releases); see [Linux](#linux).
+     It picks the right package for your system (a `.deb` on Debian, Ubuntu and Mint; an `.rpm` on Fedora and openSUSE; an Arch package on Arch and Manjaro; anywhere else it unpacks into your home folder), checks the download against the release's checksums, and sets up the permission Beckon needs to type, so there is nothing else to do. It says what it will do first and asks for your password only to install a system package. Prefer to download the file yourself? Every package is on the [releases page](https://github.com/omsingh02/beckon/releases); see [Linux](#linux).
 
-   Telepad now sits in the tray, and the first time it opens a page with a **QR code** (click its icon, then **Pair a phone…**, to see it again).
+   Beckon now sits in the tray, and the first time it opens a page with a **QR code** (click its icon, then **Pair a phone…**, to see it again).
 
 2. **Pair from Android**:
    - Connect the phone to the same local network.
-   - Open Telepad on the phone and tap **Scan QR code** (on the **Devices** tab), then point the camera at the code on the PC's screen.
+   - Open Beckon on the phone and tap **Scan QR code** (on the **Devices** tab), then point the camera at the code on the PC's screen.
    - That is all: the code carries the PC's key, so there is nothing to compare, and the phone is paired. It connects by itself from then on.
 
    No camera, or the code will not scan? Pick the PC in the **Devices** list and tap **Pair** instead, then compare the fingerprint the phone shows with the one on the PC's page (first connection only) and tap **They match**.
@@ -330,20 +330,20 @@ The network code is tested end to end against a stand-in PC that speaks the real
 
 #### Prefer a console?
 
-`telepad-server` is the same server in a terminal window, for a PC without a desktop or if you like to see what it does:
+`beckon-server` is the same server in a terminal window, for a PC without a desktop or if you like to see what it does:
 
 ```bash
 # Windows
-telepad-server-<version>-windows-x86_64.exe
+beckon-server-<version>-windows-x86_64.exe
 # Linux / macOS
-./telepad-server
+./beckon-server
 ```
 
 It prints its identity and the QR code in the terminal:
 
 ```
 ==================================================
- Telepad Desktop Server v2.0.0 (Rust)
+ Beckon Desktop Server v2.0.0 (Rust)
  Port:        5000
  Hostname:    DESKTOP-PC
  Fingerprint: 7F2A · B9C1 · 4E08 · 91D3 · 0AC7
@@ -351,9 +351,9 @@ It prints its identity and the QR code in the terminal:
  Pairing:     OPEN for 299 s: scan the code below with the app
 ==================================================
 
- Scan this code with the Telepad app: Devices, Add device, Scan QR code.
+ Scan this code with the Beckon app: Devices, Add device, Scan QR code.
  It pairs one phone, and is good for 5 minute(s). If it is cut off, make the window taller.
- No camera? Open this link on the phone instead: telepad://pair?v=1&k=...
+ No camera? Open this link on the phone instead: beckon://pair?v=1&k=...
 
 █████████████████████████████████████████████████
 ████ ▄▄▄▄▄ █▀ ▄ ▄▀█▀▄█▀█ █▀▄██ ▀█▄ ▄▀█ ▄▄▄▄▄ ████
@@ -364,7 +364,7 @@ It prints its identity and the QR code in the terminal:
 
 A phone can only control the PC after it has been **paired**, and the PC decides when that may happen, so that nobody else on the network can type on your computer.
 
-- **By QR code (the way to do it):** the tray app shows a QR code on a page of its own when it first starts, and whenever you click its icon and choose **Pair a phone…**; the console server prints it when it first starts, and whenever you type `pair` or `qr`. (The page is served by Telepad to this computer only, under a secret address, and shows a new code every time it is opened.) A phone that scans it pairs, even though no window is open. The code works for one phone, once, for five minutes, and a new code replaces the old one. It carries a secret, so do not show it on a shared screen. On a terminal with a white background the code is drawn inverted; type `qr light` to draw it the other way.
+- **By QR code (the way to do it):** the tray app shows a QR code on a page of its own when it first starts, and whenever you click its icon and choose **Pair a phone…**; the console server prints it when it first starts, and whenever you type `pair` or `qr`. (The page is served by Beckon to this computer only, under a secret address, and shows a new code every time it is opened.) A phone that scans it pairs, even though no window is open. The code works for one phone, once, for five minutes, and a new code replaces the old one. It carries a secret, so do not show it on a shared screen. On a terminal with a white background the code is drawn inverted; type `qr light` to draw it the other way.
 - **First run:** nothing is paired yet, so the server also accepts a new phone for the first 5 minutes without a code (picking the PC in the app's list). Pairing by QR code is the safer way, because only a phone that has seen the code can use it.
 - **The window is for one phone.** It closes by itself as soon as a phone has paired (or when the time is up), so nobody else on the network can slip in behind yours. The server console says so when it happens.
 - **Adding another phone later:** type `qr` (or `pair`, which also opens the window for 300 seconds, or `pair 120` for 120) in the server's console window, then scan the code with the new phone. Type `close` to shut the window early.
@@ -380,8 +380,8 @@ Console commands: `pair [seconds]`, `qr [light]`, `close`, `list`, `forget`, `st
 
 > **Requirement**: Android 9.0+ with firmware support for the Bluetooth HID Device profile (`BluetoothHidDevice`). Some OEM builds disable this profile in software.
 
-1. In Telepad, tap **Add device → Bluetooth** and follow the steps: open the phone's Bluetooth settings (the phone is visible to other devices while they are open), and on the PC add a Bluetooth device and choose the phone.
-2. Back in Telepad, choose the PC from the list. The app asks for the Bluetooth permission only now.
+1. In Beckon, tap **Add device → Bluetooth** and follow the steps: open the phone's Bluetooth settings (the phone is visible to other devices while they are open), and on the PC add a Bluetooth device and choose the phone.
+2. Back in Beckon, choose the PC from the list. The app asks for the Bluetooth permission only now.
 
 ---
 
@@ -389,45 +389,45 @@ Console commands: `pair [seconds]`, `qr [light]`, `close`, `list`, `forget`, `st
 
 ### Linux
 
-**Installing.** The one command in the [Quick Start](#quick-start) is the easy way. The same packages can be installed by hand: `sudo apt install ./telepad-v….deb` (Debian, Ubuntu, Mint, Pop!_OS), `sudo dnf install ./telepad-v….rpm` (Fedora; `sudo zypper install ./telepad-v….rpm` on openSUSE), `sudo pacman -U telepad-v….pkg.tar.zst` (Arch, Manjaro, EndeavourOS). They are system packages: Telepad is in the applications menu with its icon, and your package manager updates and removes it (`sudo apt remove telepad`, `sudo dnf remove telepad`, `sudo pacman -R telepad`). `curl -fsSL https://telepad-app.vercel.app/install.sh | sh -s -- --uninstall` removes it however it was installed. Telepad needs a 64-bit PC and glibc 2.34 or newer (every mainstream distribution from 2022 on); Alpine, which uses musl, is not supported. Without a package manager's help, `telepad-linux-x86_64.tar.gz` unpacks anywhere and `./install.sh` puts it in `~/.local` with no password (`./install.sh --uninstall` removes it).
+**Installing.** The one command in the [Quick Start](#quick-start) is the easy way. The same packages can be installed by hand: `sudo apt install ./beckon-v….deb` (Debian, Ubuntu, Mint, Pop!_OS), `sudo dnf install ./beckon-v….rpm` (Fedora; `sudo zypper install ./beckon-v….rpm` on openSUSE), `sudo pacman -U beckon-v….pkg.tar.zst` (Arch, Manjaro, EndeavourOS). They are system packages: Beckon is in the applications menu with its icon, and your package manager updates and removes it (`sudo apt remove beckon`, `sudo dnf remove beckon`, `sudo pacman -R beckon`). `curl -fsSL https://beckon.omsingh.me/install.sh | sh -s -- --uninstall` removes it however it was installed. Beckon needs a 64-bit PC and glibc 2.34 or newer (every mainstream distribution from 2022 on); Alpine, which uses musl, is not supported. Without a package manager's help, `beckon-linux-x86_64.tar.gz` unpacks anywhere and `./install.sh` puts it in `~/.local` with no password (`./install.sh --uninstall` removes it).
 
-**Typing needs a permission.** Telepad creates a virtual mouse and keyboard with the kernel's `uinput` interface, so it works under **Wayland and X11** alike, and it needs permission to open `/dev/uinput`. **The packages and the one command set this up for you.** If you unpacked the tarball yourself, Telepad starts anyway and asks: its page opens with a notice and an **Allow…** button (the tray menu has the same choice), your system asks for your password once, and typing works from then on, with no restart. The password prompt is your system's own (`pkexec`), and it shows exactly what will be run. If your system cannot show one, the page lists the same steps for a terminal. By hand, with the rule file that comes in the download (`60-telepad-uinput.rules`):
+**Typing needs a permission.** Beckon creates a virtual mouse and keyboard with the kernel's `uinput` interface, so it works under **Wayland and X11** alike, and it needs permission to open `/dev/uinput`. **The packages and the one command set this up for you.** If you unpacked the tarball yourself, Beckon starts anyway and asks: its page opens with a notice and an **Allow…** button (the tray menu has the same choice), your system asks for your password once, and typing works from then on, with no restart. The password prompt is your system's own (`pkexec`), and it shows exactly what will be run. If your system cannot show one, the page lists the same steps for a terminal. By hand, with the rule file that comes in the download (`60-beckon-uinput.rules`):
 
 ```bash
 sudo modprobe uinput
-echo uinput | sudo tee /etc/modules-load.d/telepad.conf          # load it at every boot
-sudo install -m644 60-telepad-uinput.rules /etc/udev/rules.d/
+echo uinput | sudo tee /etc/modules-load.d/beckon.conf          # load it at every boot
+sudo install -m644 60-beckon-uinput.rules /etc/udev/rules.d/
 sudo udevadm control --reload && sudo udevadm trigger
 ```
 
-The rule gives access to whoever is logged in at the computer, and takes it away at log-out. (The older way, a group, works too: put `KERNEL=="uinput", GROUP="input", MODE="0660"` in a rules file and add yourself to `input`, then log out and in.) The console program `telepad-server` does not ask: it stops and prints these steps.
+The rule gives access to whoever is logged in at the computer, and takes it away at log-out. (The older way, a group, works too: put `KERNEL=="uinput", GROUP="input", MODE="0660"` in a rules file and add yourself to `input`, then log out and in.) The console program `beckon-server` does not ask: it stops and prints these steps.
 
-- Run Telepad as your normal user, inside your desktop session. Launching programs, locking the screen and the clipboard all need that session.
-- **The tray icon** is a StatusNotifierItem, which KDE, Cinnamon, XFCE, MATE, Budgie and others show. **GNOME does not** unless you add the *AppIndicator and KStatusNotifierItem Support* extension. Without a tray, Telepad still works: it opens its page when you start it (and when you start it again, which is how to get back to the QR code and the Quit button). A start at login stays quiet.
-- `./install.sh --uninstall` removes what `install.sh` put in `~/.local`, and the start-at-login entry. Your paired phones stay in `~/.config/telepad`.
+- Run Beckon as your normal user, inside your desktop session. Launching programs, locking the screen and the clipboard all need that session.
+- **The tray icon** is a StatusNotifierItem, which KDE, Cinnamon, XFCE, MATE, Budgie and others show. **GNOME does not** unless you add the *AppIndicator and KStatusNotifierItem Support* extension. Without a tray, Beckon still works: it opens its page when you start it (and when you start it again, which is how to get back to the QR code and the Quit button). A start at login stays quiet.
+- `./install.sh --uninstall` removes what `install.sh` put in `~/.local`, and the start-at-login entry. Your paired phones stay in `~/.config/beckon`.
 - **Typing text** assumes a US-style layout for ASCII characters. Characters outside ASCII (accents, emoji, other scripts) are entered with the `Ctrl+Shift+U` Unicode sequence, which GTK applications and IBus support; some terminals and Qt apps do not. If your layout is not US-compatible (so "y" and "z" come out swapped, for example), start the server with `--text-via-unicode` to type every character that way instead. It works regardless of layout, but only in applications that accept the Unicode sequence.
 - **Quick actions** use what each desktop provides: `Super+D` (show desktop), `Super` (GNOME overview) or `Super+W` (KDE overview), `Print` (screenshot), `xdg-open` (browser and files), `loginctl lock-session` (with several fallbacks) and the first installed system monitor. GNOME and KDE are covered; other desktops may differ.
 - **Clipboard** uses the X11 clipboard (on Wayland, through XWayland). How well that is bridged on a pure-Wayland desktop varies; text typed from the phone does not depend on it.
-- **A firewall has to let the phone in** (UDP port 5000), and some Linux systems have one switched on. The packages know the names, so it is one word: `sudo ufw allow Telepad` (ufw), or `sudo firewall-cmd --reload && sudo firewall-cmd --permanent --add-service=telepad && sudo firewall-cmd --reload` (firewalld, the default on Fedora and openSUSE). With hand-written nftables rules, add one to the `input` chain, before its final `drop` or `reject`:
+- **A firewall has to let the phone in** (UDP port 5000), and some Linux systems have one switched on. The packages know the names, so it is one word: `sudo ufw allow Beckon` (ufw), or `sudo firewall-cmd --reload && sudo firewall-cmd --permanent --add-service=beckon && sudo firewall-cmd --reload` (firewalld, the default on Fedora and openSUSE). With hand-written nftables rules, add one to the `input` chain, before its final `drop` or `reject`:
   ```
-  ip saddr 192.168.0.0/24 udp dport 5000 accept comment "telepad from the home network"
+  ip saddr 192.168.0.0/24 udp dport 5000 accept comment "beckon from the home network"
   ```
   (use your own network's addresses). **If a rule names an interface** (`iifname "wlp3s0"`), it covers that one only: a laptop that is on Ethernet at the moment needs `enp2s0` or whatever it is called as well, or the phone will say it cannot reach the PC while the Wi-Fi card sits idle.
 
 ### macOS
 
-- Open the `.dmg` and drag **Telepad** to **Applications**. It is a menu bar app: it has no Dock icon and no window, only an icon at the top of the screen. Open it again from Applications or Spotlight to see the QR code.
-- On first use macOS asks you to allow Telepad to control the computer. Enable it in **System Settings > Privacy & Security > Accessibility**. Without this, macOS silently discards every injected event, so Telepad does not leave it to chance: while the permission is missing, the menu bar menu starts with *Needs your permission to control this Mac* and has an **Allow Telepad to control this Mac…** item, and the page has a notice with a button that opens the Accessibility list. The notice goes away by itself once you have switched Telepad on. (When the app is not yet notarized, macOS forgets this permission after each update, and the notice comes back: allow it again. A notarized app keeps it.)
-- The download is not notarized yet (see [docs/code-signing.md](docs/code-signing.md)), so macOS says it cannot verify it. Open **System Settings > Privacy & Security**, scroll down, and choose **Open Anyway** once. From a terminal: `xattr -dr com.apple.quarantine /Applications/Telepad.app`. The same goes for the console server: `xattr -d com.apple.quarantine ./telepad-server`.
+- Open the `.dmg` and drag **Beckon** to **Applications**. It is a menu bar app: it has no Dock icon and no window, only an icon at the top of the screen. Open it again from Applications or Spotlight to see the QR code.
+- On first use macOS asks you to allow Beckon to control the computer. Enable it in **System Settings > Privacy & Security > Accessibility**. Without this, macOS silently discards every injected event, so Beckon does not leave it to chance: while the permission is missing, the menu bar menu starts with *Needs your permission to control this Mac* and has an **Allow Beckon to control this Mac…** item, and the page has a notice with a button that opens the Accessibility list. The notice goes away by itself once you have switched Beckon on. (When the app is not yet notarized, macOS forgets this permission after each update, and the notice comes back: allow it again. A notarized app keeps it.)
+- The download is not notarized yet (see [docs/code-signing.md](docs/code-signing.md)), so macOS says it cannot verify it. Open **System Settings > Privacy & Security**, scroll down, and choose **Open Anyway** once. From a terminal: `xattr -dr com.apple.quarantine /Applications/Beckon.app`. The same goes for the console server: `xattr -d com.apple.quarantine ./beckon-server`.
 - The phone's **Win** key acts as **⌘ Command** and **Alt** as **⌥ Option**, as with any PC keyboard on a Mac. To make Windows-style shortcuts work as they do on Windows, start the console server with `--mac-ctrl-as-cmd`, which makes the phone's Ctrl act as ⌘ (and Win as Control). The app already sends ⌘ shortcuts when it knows the PC is a Mac.
-- Allow incoming connections when macOS asks, or add the program in **Network > Firewall**. macOS may also ask to let Telepad find devices on the local network: allow it.
+- Allow incoming connections when macOS asks, or add the program in **Network > Firewall**. macOS may also ask to let Beckon find devices on the local network: allow it.
 
 ### Windows
 
-- The installer puts Telepad in `%LOCALAPPDATA%\Programs\Telepad` (no administrator needed) and in **Settings > Apps**, where it can be uninstalled. Running the installer again updates it, and asks the running Telepad to quit first. Uninstalling keeps your paired phones in `%APPDATA%\Telepad`; delete that folder to forget them. To update the portable `.exe` just replace it (and tick **Start at login** again if you move it).
+- The installer puts Beckon in `%LOCALAPPDATA%\Programs\Beckon` (no administrator needed) and in **Settings > Apps**, where it can be uninstalled. Running the installer again updates it, and asks the running Beckon to quit first. Uninstalling keeps your paired phones in `%APPDATA%\Beckon`; delete that folder to forget them. To update the portable `.exe` just replace it (and tick **Start at login** again if you move it).
 - **Windows protected your PC** (SmartScreen) appears because the download is not code-signed yet: choose **More info**, then **Run anyway**.
 - Allow inbound UDP port 5000 in Windows Firewall (see [Troubleshooting](#troubleshooting)); Windows usually asks the first time.
-- Telepad cannot inject input into elevated windows (an administrator command prompt, UAC prompts) unless it is run as administrator.
+- Beckon cannot inject input into elevated windows (an administrator command prompt, UAC prompts) unless it is run as administrator.
 - The tray icon may be in the hidden icons (the **^** by the clock): drag it out to keep it visible.
 
 ---
@@ -442,12 +442,12 @@ The rule gives access to whoever is logged in at the computer, and takes it away
 ### 1. Build Desktop Server (Rust)
 
 ```bash
-git clone https://github.com/omsingh02/telepad.git
-cd telepad
+git clone https://github.com/omsingh02/beckon.git
+cd beckon
 
-cargo build --release --bin telepad --bin telepad-server
-# target/release/telepad          the tray app (telepad.exe on Windows)
-# target/release/telepad-server   the console server
+cargo build --release --bin beckon --bin beckon-server
+# target/release/beckon          the tray app (beckon.exe on Windows)
+# target/release/beckon-server   the console server
 ```
 
 The installers and packages are made by scripts in [`packaging/`](packaging/README.md), which the release workflow and CI both use.
@@ -493,53 +493,53 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for more.
 1. **Firewall**: allow inbound UDP on port 5000. When the phone says *Couldn't reach*, it now tells you whether the PC is on the same network as the phone (then it is almost certainly a firewall) or on another one (then it is the network).
    - Windows:
      ```powershell
-     New-NetFirewallRule -DisplayName "Telepad Server" -Direction Inbound -LocalPort 5000 -Protocol UDP -Action Allow
+     New-NetFirewallRule -DisplayName "Beckon Server" -Direction Inbound -LocalPort 5000 -Protocol UDP -Action Allow
      ```
-   - Linux: `sudo ufw allow Telepad` (or `sudo ufw allow 5000/udp` without the package), the `firewall-cmd` line above, or an nftables rule (see [Linux](#linux), including the note about which interface a rule names).
+   - Linux: `sudo ufw allow Beckon` (or `sudo ufw allow 5000/udp` without the package), the `firewall-cmd` line above, or an nftables rule (see [Linux](#linux), including the note about which interface a rule names).
    - macOS: click **Allow** on the "accept incoming network connections" prompt.
 2. **Access Point Isolation**: some guest Wi-Fi networks and mesh routers block device-to-device UDP traffic.
 3. **Manual IP Connection**: tap **Add device** in the app, choose **Address**, and enter your PC's local IP address (`ipconfig` on Windows, `ip addr` on Linux, `ipconfig getifaddr en0` on macOS). The app asks the PC for its name and key, so you still verify the fingerprint.
 
-### Telepad has no icon, or I cannot find it
-- **Windows:** look under the **^** by the clock. **macOS:** the menu bar, at the top right. **Linux:** see the [tray note](#linux); on GNOME without the AppIndicator extension there is no icon, and starting Telepad again (from the applications menu) opens its page.
-- Starting Telepad a second time never starts a second copy: it opens the page of the one that is running. `telepad --quit` asks the running one to quit.
-- It writes nothing to your screen on Windows when something goes wrong at start: it shows a message box instead. Run it from a terminal with `--verbose` to see details (on Windows use the console server, `telepad-server`, for that).
+### Beckon has no icon, or I cannot find it
+- **Windows:** look under the **^** by the clock. **macOS:** the menu bar, at the top right. **Linux:** see the [tray note](#linux); on GNOME without the AppIndicator extension there is no icon, and starting Beckon again (from the applications menu) opens its page.
+- Starting Beckon a second time never starts a second copy: it opens the page of the one that is running. `beckon --quit` asks the running one to quit.
+- It writes nothing to your screen on Windows when something goes wrong at start: it shows a message box instead. Run it from a terminal with `--verbose` to see details (on Windows use the console server, `beckon-server`, for that).
 
 ### Reporting a problem, and where the log is
-Open an [issue](https://github.com/omsingh02/telepad/issues/new/choose) (the tray page's **Report a problem** link does that). It helps to say the version (the tray page shows it, and the phone app under **Settings → About**) and to attach the desktop app's log, which holds what the program did and never what you typed. The page shows where it is; usually:
+Open an [issue](https://github.com/omsingh02/beckon/issues/new/choose) (the tray page's **Report a problem** link does that). It helps to say the version (the tray page shows it, and the phone app under **Settings → About**) and to attach the desktop app's log, which holds what the program did and never what you typed. The page shows where it is; usually:
 
 | | |
 | :--- | :--- |
-| Windows | `%APPDATA%\Telepad\telepad.log` |
-| macOS | `~/Library/Application Support/Telepad/telepad.log` |
-| Linux | `~/.config/telepad/telepad.log` |
+| Windows | `%APPDATA%\Beckon\beckon.log` |
+| macOS | `~/Library/Application Support/Beckon/beckon.log` |
+| Linux | `~/.config/beckon/beckon.log` |
 
 For more detail start the program with `--verbose` (the console server prints it to the terminal). Look through the log before you share it: it has your PC's name and the addresses of your phones.
 
 ### The QR code will not scan
 - **On the tray app's page** the code is drawn for you: make the page bigger (zoom the browser) if the phone struggles.
 - **In the console server, make the terminal window taller.** The code is about 25 lines high, and a code that is cut off cannot be read. The instructions above it scroll away first.
-- **A terminal with a white background** shows the code inverted. The Telepad app reads it either way, but another scanner may not: type `qr light` in the server console.
+- **A terminal with a white background** shows the code inverted. The Beckon app reads it either way, but another scanner may not: type `qr light` in the server console.
 - **Hold the phone steadier and closer**, and turn up the screen's brightness. Increasing the terminal's font size makes the code bigger too.
-- **The camera is off for Telepad.** Turn it on in the phone's settings for the app; the scanner says so and has a button for it.
-- **No camera, or still no luck:** copy the `telepad://pair?...` link the server prints, send it to the phone and open it there, or pick the PC in the **Devices** list and compare the fingerprint.
+- **The camera is off for Beckon.** Turn it on in the phone's settings for the app; the scanner says so and has a button for it.
+- **No camera, or still no luck:** copy the `beckon://pair?...` link the server prints, send it to the phone and open it there, or pick the PC in the **Devices** list and compare the fingerprint.
 - **"The code has expired"** (the app says the PC has not accepted the phone): a code lasts five minutes and works once. Click the tray icon and choose **Pair a phone…** (or type `qr` in the console server) for a new one.
 
 ### "…hasn't accepted this phone"
 The PC refused the phone because it has not been paired. Scan the QR code from **Pair a phone…** in the tray menu (or type `pair` in the console server, or restart it with `--pair`) and tap **Try again**.
 
-### Linux: "Needs your permission to type and click" (or `telepad-server` stops with "permission denied" on /dev/uinput)
+### Linux: "Needs your permission to type and click" (or `beckon-server` stops with "permission denied" on /dev/uinput)
 Choose **Allow…** (on the page, or in the tray menu), or follow the [Linux setup](#linux). Use `--no-input` to run the protocol without injecting input, which is handy for diagnostics.
 
 ### Connected, but nothing moves on macOS
-macOS is discarding the events. Telepad's menu says *Needs your permission to control this Mac* when that is the reason: choose **Allow Telepad to control this Mac…** and switch Telepad on, as described in [macOS](#macos).
+macOS is discarding the events. Beckon's menu says *Needs your permission to control this Mac* when that is the reason: choose **Allow Beckon to control this Mac…** and switch Beckon on, as described in [macOS](#macos).
 
 ### Cursor feels jittery, too slow or too fast
 - Open **Settings → Touchpad**: there is a pad at the top to try changes on right away. *Pointer speed* and *Acceleration* decide the feel. *None* moves the pointer in proportion to your finger at the chosen speed; *Fixed* is exactly 1:1 and ignores the speed setting.
-- **Battery Optimization**: on Android, set Telepad battery usage to **Unrestricted** (`Settings` → `Apps` → `Telepad` → `Battery`) to prevent background throttling, or switch on **Stay connected in the background**.
+- **Battery Optimization**: on Android, set Beckon battery usage to **Unrestricted** (`Settings` → `Apps` → `Beckon` → `Battery`) to prevent background throttling, or switch on **Stay connected in the background**.
 
 ### "…has a new identity" (key warning)
-The app compared the PC's key with the one it paired and they differ. That happens if Telepad was reinstalled on the PC (or its key folder was deleted). It can also mean something else on the network is pretending to be the PC, which is why the app asks you to compare the fingerprint again. Only continue if you know the PC's key changed and the code matches what the PC shows now. To clear an old entry, forget the PC under **Settings → Privacy and security**.
+The app compared the PC's key with the one it paired and they differ. That happens if Beckon was reinstalled on the PC (or its key folder was deleted). It can also mean something else on the network is pretending to be the PC, which is why the app asks you to compare the fingerprint again. Only continue if you know the PC's key changed and the code matches what the PC shows now. To clear an old entry, forget the PC under **Settings → Privacy and security**.
 
 ### Keys or buttons stay pressed after the phone disconnects
 The server releases anything a phone was holding once it has been silent for 10 seconds. If you see this persist, run with `--verbose` and report it.
@@ -549,20 +549,20 @@ The server releases anything a phone was holding once it has been silent for 10 
 ## Project Structure
 
 ```
-telepad/
+beckon/
 ├── android/                    # Android client (Kotlin + Jetpack Compose)
 │   ├── app/src/main/           # app code (see "Android app structure" above)
 │   ├── app/src/test/           # unit, network, screen and screenshot tests
 │   └── app/src/test/screenshots/   # the pictures of every screen
 ├── crates/                     # Rust Desktop Server Workspace
-│   ├── telepad-server/         # Tokio UDP server: discovery, pairing, invitations (QR), sessions, console
-│   ├── telepad-tray/           # the `telepad` app: tray icon, the page with the QR code, start at login
-│   ├── telepad-update/         # looks for a newer release on GitHub and installs it (Windows, macOS, Linux)
-│   ├── telepad-platform/       # OS layer: Windows SendInput, Linux uinput, macOS CoreGraphics,
+│   ├── beckon-server/         # Tokio UDP server: discovery, pairing, invitations (QR), sessions, console
+│   ├── beckon-tray/           # the `beckon` app: tray icon, the page with the QR code, start at login
+│   ├── beckon-update/         # looks for a newer release on GitHub and installs it (Windows, macOS, Linux)
+│   ├── beckon-platform/       # OS layer: Windows SendInput, Linux uinput, macOS CoreGraphics,
 │   │                           #   clipboard, network interfaces, config paths, start at login,
-│   │                           #   whether the system lets Telepad type, and asking it to
-│   ├── telepad-crypto/         # Noise IK handshake, ChaCha20-Poly1305, key storage
-│   └── telepad-protocol/       # Binary wire protocol definitions and codecs
+│   │                           #   whether the system lets Beckon type, and asking it to
+│   ├── beckon-crypto/         # Noise IK handshake, ChaCha20-Poly1305, key storage
+│   └── beckon-protocol/       # Binary wire protocol definitions and codecs
 ├── packaging/                  # Windows installer, macOS app and disk image, Linux tarball, icons
 ├── website/                    # the landing page (plain HTML and CSS, served by Vercel)
 ├── docs/                       # brand assets, the manual test plan, the code-signing guide
@@ -571,7 +571,7 @@ telepad/
 ├── CHANGELOG.md                # what changed in each release
 ├── CONTRIBUTING.md             # how to build, test and contribute
 ├── SECURITY.md                 # security model and how to report a vulnerability
-├── PRIVACY.md                  # what Telepad collects (nothing) and where data goes
+├── PRIVACY.md                  # what Beckon collects (nothing) and where data goes
 ├── THIRD_PARTY_LICENSES.md     # licenses of the libraries in the desktop programs (made from Cargo.lock)
 ├── CODE_OF_CONDUCT.md
 └── README.md
@@ -581,9 +581,9 @@ telepad/
 
 ## Contributing
 
-Bug reports, ideas and patches are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) explains how to build and test both halves, [SECURITY.md](SECURITY.md) how to report a vulnerability privately, and the [Code of Conduct](CODE_OF_CONDUCT.md) how we treat each other. Questions are welcome in [Discussions](https://github.com/omsingh02/telepad/discussions).
+Bug reports, ideas and patches are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) explains how to build and test both halves, [SECURITY.md](SECURITY.md) how to report a vulnerability privately, and the [Code of Conduct](CODE_OF_CONDUCT.md) how we treat each other. Questions are welcome in [Discussions](https://github.com/omsingh02/beckon/discussions).
 
-Telepad collects no data: see [PRIVACY.md](PRIVACY.md). The licenses of the libraries inside it are in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) (the desktop programs) and under **Settings → About** in the phone app.
+Beckon collects no data: see [PRIVACY.md](PRIVACY.md). The licenses of the libraries inside it are in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) (the desktop programs) and under **Settings → About** in the phone app.
 
 ## License
 

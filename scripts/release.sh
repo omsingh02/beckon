@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Publishes a release of Telepad.
+# Publishes a release of Beckon.
 #
 #   scripts/release.sh 2.1.0              checks everything, and asks before each step that cannot be undone
 #   scripts/release.sh 2.1.0-alpha.1      a pre-release: the code still says 2.1.0; the build is given the whole version (2.1.0-alpha.1)
@@ -109,7 +109,7 @@ fi
 # --- Tag, which starts the Release workflow -----------------------------------------------
 say "Ready to tag $tag. The Release workflow builds the phone app and the desktop apps, signs the APK, and publishes."
 ask "Create the signed tag $tag and push it?"
-run git tag -s "$tag" -m "Telepad $full"
+run git tag -s "$tag" -m "Beckon $full"
 run git push origin "$tag"
 
 if [ "$dry" = 1 ]; then
@@ -141,11 +141,11 @@ else
 fi
 check_links() {
   local failed=0 name code
-  for name in telepad-android.apk \
-              telepad-windows-x86_64-setup.exe telepad-windows-x86_64.exe telepad-macos-universal.dmg \
-              telepad-linux-x86_64.tar.gz telepad-linux-x86_64.deb telepad-linux-x86_64.rpm telepad-linux-x86_64.pkg.tar.zst \
-              telepad-server-windows-x86_64.exe telepad-server-windows-x86_64.zip \
-              telepad-server-linux-x86_64.tar.gz telepad-server-macos-universal.tar.gz SHA256SUMS; do
+  for name in beckon-android.apk \
+              beckon-windows-x86_64-setup.exe beckon-windows-x86_64.exe beckon-macos-universal.dmg \
+              beckon-linux-x86_64.tar.gz beckon-linux-x86_64.deb beckon-linux-x86_64.rpm beckon-linux-x86_64.pkg.tar.zst \
+              beckon-server-windows-x86_64.exe beckon-server-windows-x86_64.zip \
+              beckon-server-linux-x86_64.tar.gz beckon-server-macos-universal.tar.gz SHA256SUMS; do
     code="$(curl -s -o /dev/null -w '%{http_code}' -L "$download_base/$name")"
     printf '    %-42s %s\n' "$name" "$code"
     [ "$code" = 200 ] || failed=1
@@ -165,12 +165,12 @@ if [ -n "$apksigner" ] && command -v java > /dev/null; then
   work="$(mktemp -d)"
   cleanup() { if [ -n "${work:-}" ] && [ -d "$work" ]; then rm -r -- "$work"; fi; }
   trap cleanup EXIT
-  gh release download "$tag" --repo "$repo" --pattern 'telepad-android.apk' --dir "$work"
-  new_key="$("$apksigner" verify --print-certs "$work/telepad-android.apk" | sed -nE 's/^Signer #1 certificate SHA-256 digest: //p')"
+  gh release download "$tag" --repo "$repo" --pattern 'beckon-android.apk' --dir "$work"
+  new_key="$("$apksigner" verify --print-certs "$work/beckon-android.apk" | sed -nE 's/^Signer #1 certificate SHA-256 digest: //p')"
   echo "    $tag is signed with $new_key"
   # GitHub's signed statement of which workflow run built the file, which anyone can check the same way.
-  if gh attestation verify "$work/telepad-android.apk" --repo "$repo" > /dev/null 2>&1; then
-    echo "    the APK has a valid build attestation (gh attestation verify telepad-android.apk --repo $repo)"
+  if gh attestation verify "$work/beckon-android.apk" --repo "$repo" > /dev/null 2>&1; then
+    echo "    the APK has a valid build attestation (gh attestation verify beckon-android.apk --repo $repo)"
   else
     warn "no valid build attestation was found for the APK (it can take a minute to appear, or gh may be too old)"
   fi

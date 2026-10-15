@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Signs what make-app.sh and make-dmg.sh made and, when Apple's credentials are there, has Apple notarize it.
 #
-#   packaging/macos/sign-and-notarize.sh app Telepad.app
-#   packaging/macos/sign-and-notarize.sh dmg Telepad.dmg
+#   packaging/macos/sign-and-notarize.sh app Beckon.app
+#   packaging/macos/sign-and-notarize.sh dmg Beckon.dmg
 #
 # Without credentials the app only gets an "ad-hoc" signature, which is what a program needs to run at all on an
 # Apple silicon Mac; Gatekeeper will still ask the person to allow it (System Settings > Privacy & Security > Open
@@ -18,12 +18,12 @@
 set -euo pipefail
 
 if [ "$#" -ne 2 ] || { [ "$1" != "app" ] && [ "$1" != "dmg" ]; }; then
-  echo "usage: $0 app <Telepad.app> | dmg <Telepad.dmg>" >&2
+  echo "usage: $0 app <Beckon.app> | dmg <Beckon.dmg>" >&2
   exit 2
 fi
 kind="$1"
 target="$2"
-bundle_id="io.github.omsingh02.telepad"
+bundle_id="io.github.omsingh02.beckon"
 
 if [ "$(uname -s)" != "Darwin" ]; then
   echo "sign-and-notarize.sh: this needs a Mac (codesign and notarytool)" >&2
@@ -43,7 +43,7 @@ if [ -z "$identity" ] || [ -z "${APPLE_CERTIFICATE_BASE64:-}" ]; then
 fi
 
 work="$(mktemp -d)"
-keychain="$work/telepad-signing.keychain-db"
+keychain="$work/beckon-signing.keychain-db"
 cleanup() {
   security delete-keychain "$keychain" > /dev/null 2>&1 || true
   if [ -n "${work:-}" ] && [ -d "$work" ]; then rm -r -- "$work"; fi
@@ -74,7 +74,7 @@ fi
 printf '%s' "$APPLE_API_KEY_BASE64" | base64 --decode > "$work/AuthKey.p8"
 if [ "$kind" = "app" ]; then
   # Apple takes a zip or a disk image, not a bundle.
-  submission="$work/Telepad.zip"
+  submission="$work/Beckon.zip"
   ditto -c -k --keepParent "$target" "$submission"
 else
   submission="$target"

@@ -22,9 +22,9 @@ square="$(mktemp --suffix=.svg)"
 sed -e 's/rx="24"/rx="0"/' -e '/stroke-opacity="\.16"/d' "$here/icon.svg" > "$square"
 rsvg-convert -w 180 -h 180 "$square" -o "$img/apple-touch-icon.png"
 rm -f "$square"
-for size in 16 32 48; do rsvg-convert -w "$size" "$img/favicon.svg" -o "/tmp/telepad-favicon-$size.png"; done
-magick /tmp/telepad-favicon-16.png /tmp/telepad-favicon-32.png /tmp/telepad-favicon-48.png "$img/favicon.ico"
-rm -f /tmp/telepad-favicon-16.png /tmp/telepad-favicon-32.png /tmp/telepad-favicon-48.png
+for size in 16 32 48; do rsvg-convert -w "$size" "$img/favicon.svg" -o "/tmp/beckon-favicon-$size.png"; done
+magick /tmp/beckon-favicon-16.png /tmp/beckon-favicon-32.png /tmp/beckon-favicon-48.png "$img/favicon.ico"
+rm -f /tmp/beckon-favicon-16.png /tmp/beckon-favicon-32.png /tmp/beckon-favicon-48.png
 optipng -quiet -o4 "$img/icon-192.png" "$img/icon-512.png" "$img/apple-touch-icon.png"
 
 # --- Social images -----------------------------------------------------------------------

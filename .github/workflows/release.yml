@@ -111,7 +111,7 @@ jobs:
           merge-multiple: true
 
       # The same files again under names without the version, so that links such as
-      # .../releases/latest/download/telepad-android.apk keep working from release to release
+      # .../releases/latest/download/beckon-android.apk keep working from release to release
       # (the website's download buttons use them).
       - name: Add version-less copies of each file
         working-directory: release-assets
@@ -170,14 +170,14 @@ jobs:
 
           | You have | Download |
           | --- | --- |
-          | An Android phone | `telepad-android.apk` |
-          | A Windows PC | `telepad-windows-x86_64-setup.exe` (installer), or `telepad-windows-x86_64.exe` to run without installing |
-          | A Mac | `telepad-macos-universal.dmg` |
-          | A Linux PC | One command: `curl -fsSL https://telepad-app.vercel.app/install.sh \| sh` (it picks the right file below), or download `telepad-linux-x86_64.deb` (Debian, Ubuntu, Mint), `telepad-linux-x86_64.rpm` (Fedora, openSUSE), `telepad-linux-x86_64.pkg.tar.zst` (Arch) or `telepad-linux-x86_64.tar.gz` (anything else, then run `./install.sh`) |
+          | An Android phone | `beckon-android.apk` |
+          | A Windows PC | `beckon-windows-x86_64-setup.exe` (installer), or `beckon-windows-x86_64.exe` to run without installing |
+          | A Mac | `beckon-macos-universal.dmg` |
+          | A Linux PC | One command: `curl -fsSL https://beckon.omsingh.me/install.sh \| sh` (it picks the right file below), or download `beckon-linux-x86_64.deb` (Debian, Ubuntu, Mint), `beckon-linux-x86_64.rpm` (Fedora, openSUSE), `beckon-linux-x86_64.pkg.tar.zst` (Arch) or `beckon-linux-x86_64.tar.gz` (anything else, then run `./install.sh`) |
 
-          For a PC with no desktop, there is also a console-only server: `telepad-server-windows-x86_64.exe` (or `.zip`), `telepad-server-linux-x86_64.tar.gz` and `telepad-server-macos-universal.tar.gz`.
+          For a PC with no desktop, there is also a console-only server: `beckon-server-windows-x86_64.exe` (or `.zip`), `beckon-server-linux-x86_64.tar.gz` and `beckon-server-macos-universal.tar.gz`.
 
-          Telepad on the PC shows a QR code the first time it starts: scan it with the Telepad app on your phone.
+          Beckon on the PC shows a QR code the first time it starts: scan it with the Beckon app on your phone.
 
           ### If your system warns you
 
@@ -187,9 +187,9 @@ jobs:
               echo '- **Windows** may say "Windows protected your PC", because this build is not code-signed yet. Choose **More info**, then **Run anyway**.'
             fi
             if [ "$MACOS_SIGNED" != "true" ]; then
-              echo '- **macOS** may say it cannot verify Telepad, because this build is not notarized yet. Open **System Settings > Privacy & Security** and choose **Open Anyway**. macOS also asks to let Telepad control the computer (Accessibility): allow it, or the phone cannot type or click.'
+              echo '- **macOS** may say it cannot verify Beckon, because this build is not notarized yet. Open **System Settings > Privacy & Security** and choose **Open Anyway**. macOS also asks to let Beckon control the computer (Accessibility): allow it, or the phone cannot type or click.'
             else
-              echo '- **macOS** asks to let Telepad control the computer (Accessibility): allow it, or the phone cannot type or click.'
+              echo '- **macOS** asks to let Beckon control the computer (Accessibility): allow it, or the phone cannot type or click.'
             fi
             cat <<'EOF'
 
@@ -198,7 +198,7 @@ jobs:
           Every file is listed in `SHA256SUMS`, and GitHub holds a signed statement of which build produced each one:
 
           ```
-          gh attestation verify telepad-android.apk --repo ${{ github.repository }}
+          gh attestation verify beckon-android.apk --repo ${{ github.repository }}
           ```
 
           Setup instructions are in the [README](https://github.com/${{ github.repository }}#quick-start).
@@ -210,7 +210,7 @@ jobs:
         with:
           tag_name: ${{ env.TAG }}
           target_commitish: ${{ steps.meta.outputs.commit_sha }}
-          name: Telepad ${{ env.TAG }}
+          name: Beckon ${{ env.TAG }}
           body_path: release-notes.md
           generate_release_notes: true
           prerelease: ${{ contains(env.TAG, '-') }}

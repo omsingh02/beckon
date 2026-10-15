@@ -1,4 +1,4 @@
-// Telepad landing page. Small on purpose: no libraries, no network requests.
+// Beckon landing page. Small on purpose: no libraries, no network requests.
 (() => {
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 

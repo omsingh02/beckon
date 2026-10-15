@@ -36,7 +36,7 @@ jobs:
           filters: |
             android:
               - 'android/**'
-              - 'crates/telepad-protocol/**'
+              - 'crates/beckon-protocol/**'
               - '.github/workflows/**'
             rust:
               - 'crates/**'
@@ -114,7 +114,7 @@ jobs:
       - name: Run Cargo Tests as a release does
         if: runner.os == 'Linux'
         env:
-          TELEPAD_RELEASE_VERSION: 2.0.0-alpha.99
+          BECKON_RELEASE_VERSION: 2.0.0-alpha.99
         run: cargo test --workspace --locked
 
   # Everything a release ships, built and tried: the same workflow the release runs, so that a release is this with a

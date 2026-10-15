@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Puts the program into an application bundle, Telepad.app, which is what macOS wants to double-click.
+# Puts the program into an application bundle, Beckon.app, which is what macOS wants to double-click.
 #
-#   packaging/macos/make-app.sh <version> <telepad-binary> <output-folder>
+#   packaging/macos/make-app.sh <version> <beckon-binary> <output-folder>
 #
-# <version> is the number, such as 2.0.0 (no "v", no "-alpha"). The bundle is written to <output-folder>/Telepad.app.
+# <version> is the number, such as 2.0.0 (no "v", no "-alpha"). The bundle is written to <output-folder>/Beckon.app.
 # This part runs anywhere; signing it and making the disk image need a Mac (sign-and-notarize.sh, make-dmg.sh).
 set -euo pipefail
 
 if [ "$#" -ne 3 ]; then
-  echo "usage: $0 <version> <telepad-binary> <output-folder>" >&2
+  echo "usage: $0 <version> <beckon-binary> <output-folder>" >&2
   exit 2
 fi
 version="$1"
@@ -24,15 +24,15 @@ case "$version" in
     ;;
 esac
 
-app="$output/Telepad.app"
+app="$output/Beckon.app"
 mkdir -p "$output"
 if [ -e "$app" ]; then
   echo "make-app.sh: $app is already there; remove it first" >&2
   exit 1
 fi
 mkdir -p "$app/Contents/MacOS" "$app/Contents/Resources"
-install -m755 "$binary" "$app/Contents/MacOS/telepad"
-install -m644 "$repo/packaging/icons/Telepad.icns" "$app/Contents/Resources/Telepad.icns"
+install -m755 "$binary" "$app/Contents/MacOS/beckon"
+install -m644 "$repo/packaging/icons/Beckon.icns" "$app/Contents/Resources/Beckon.icns"
 install -m644 "$repo/LICENSE" "$app/Contents/Resources/LICENSE"
 install -m644 "$repo/THIRD_PARTY_LICENSES.md" "$app/Contents/Resources/THIRD_PARTY_LICENSES.md"
 sed "s/@VERSION@/$version/g" "$here/Info.plist.in" > "$app/Contents/Info.plist"
