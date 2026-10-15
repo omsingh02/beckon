@@ -1,3 +1,6 @@
+> [!WARNING]
+> **Under Maintenance**: Beckon is currently undergoing maintenance and release setup. Pre-built downloads and package updates will be available shortly.
+
 <div align="center">
 
 <picture>
