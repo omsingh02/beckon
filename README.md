@@ -5,6 +5,8 @@
   <img src="docs/brand/logo.svg" alt="Beckon" width="300">
 </picture>
 
+Beckon (formerly Telepad)
+
 **Your phone as a trackpad and keyboard for your computer.**
 
 Windows, Linux and macOS, over Wi-Fi or Bluetooth. Open source, end-to-end encrypted, no account.
