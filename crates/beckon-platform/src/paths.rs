@@ -12,26 +12,14 @@ use std::path::{Path, PathBuf};
 /// Falls back to `./beckon-data` only when the OS reports no home directory
 /// at all (a bare service account), so the server still starts.
 pub fn default_config_dir() -> PathBuf {
-    resolve_config_dir(dirs::config_dir(), dirs::home_dir())
+    resolve_config_dir(dirs::config_dir())
 }
 
-fn resolve_config_dir(config_dir: Option<PathBuf>, home_dir: Option<PathBuf>) -> PathBuf {
+fn resolve_config_dir(config_dir: Option<PathBuf>) -> PathBuf {
     let Some(base) = config_dir else {
         return PathBuf::from("./beckon-data");
     };
-    let dir = base.join(app_dir_name());
-
-    // macOS used to follow the Linux convention (`~/.config/beckon`) in early
-    // builds. Keep honouring an existing identity there: moving it silently
-    // would change the server fingerprint and force every phone to re-pair.
-    if cfg!(target_os = "macos") && !dir.exists() {
-        if let Some(legacy) = home_dir.map(|h| h.join(".config").join("beckon")) {
-            if has_identity(&legacy) {
-                return legacy;
-            }
-        }
-    }
-    dir
+    base.join(app_dir_name())
 }
 
 /// Creates `dir` and any missing parents. Directories created by this call are
@@ -60,17 +48,13 @@ fn app_dir_name() -> &'static str {
     }
 }
 
-fn has_identity(dir: &Path) -> bool {
-    dir.join("identity.key").is_file()
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn dir_is_namespaced_under_the_platform_config_dir() {
-        let dir = resolve_config_dir(Some(PathBuf::from("/cfg")), Some(PathBuf::from("/home/u")));
+        let dir = resolve_config_dir(Some(PathBuf::from("/cfg")));
         assert!(dir.starts_with("/cfg"));
         assert_eq!(dir.file_name().unwrap(), app_dir_name());
         if cfg!(any(windows, target_os = "macos")) {
@@ -82,10 +66,7 @@ mod tests {
 
     #[test]
     fn no_home_directory_falls_back_to_a_local_folder() {
-        assert_eq!(
-            resolve_config_dir(None, None),
-            PathBuf::from("./beckon-data")
-        );
+        assert_eq!(resolve_config_dir(None), PathBuf::from("./beckon-data"));
     }
 
     #[test]
@@ -127,20 +108,5 @@ mod tests {
         ensure_private_dir(&shared).unwrap();
         assert_eq!(mode(&shared), 0o755);
         std::fs::remove_dir_all(&root).unwrap();
-    }
-
-    #[cfg(target_os = "macos")]
-    #[test]
-    fn legacy_macos_identity_is_still_honoured() {
-        let tmp = std::env::temp_dir().join(format!("beckon_paths_{}", std::process::id()));
-        let legacy = tmp.join(".config").join("beckon");
-        std::fs::create_dir_all(&legacy).unwrap();
-        std::fs::write(legacy.join("identity.key"), [0u8; 32]).unwrap();
-        let dir = resolve_config_dir(
-            Some(tmp.join("Library/Application Support")),
-            Some(tmp.clone()),
-        );
-        assert_eq!(dir, legacy);
-        std::fs::remove_dir_all(&tmp).unwrap();
     }
 }
