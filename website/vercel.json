@@ -12,7 +12,7 @@
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "telepad-app.vercel.app" }],
       "destination": "https://beckon.omsingh.me/$1",
-      "permanent": false
+      "permanent": true
     }
   ],
   "headers": [
