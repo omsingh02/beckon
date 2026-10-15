@@ -2,6 +2,22 @@
 
 All notable changes are listed here, newest first. The format follows [Keep a Changelog](https://keepachangelog.com), and the project uses [Semantic Versioning](https://semver.org). The Android app, the desktop app and server and the git tag share one version number.
 
+## [Unreleased]
+
+### Renamed Telepad to Beckon
+
+The project is now **Beckon** (formerly Telepad). The apps, packages, files and website use the new name. How it works, including the pairing protocol, has not changed.
+
+#### Upgrade notes
+
+- **Nothing is migrated.** Beckon does not read Telepad's files, settings or pairings. Install Beckon on the phone and on the PC, pair again, and remove Telepad afterwards.
+- **Android:** the application id is now `com.omsingh.beckon`, so Beckon installs as a separate app next to Telepad and Telepad does not update to it.
+- **Desktop files:** the folder is now `beckon` (`%APPDATA%\Beckon`, `~/Library/Application Support/Beckon`, `~/.config/beckon`) and the log file is `beckon.log`.
+- **Names the system sees:** the program is `beckon`, and so are the Linux packages (`beckon`, `beckon-bin` on Arch). The firewall entries are the `Beckon` ufw profile and the `beckon` firewalld service. The udev rule is `60-beckon-uinput.rules`. The start-at-login entry, the `.desktop` file, the macOS bundle id and the LaunchAgent label use the new name too. Remove Telepad's old entries by hand.
+- **Environment variables:** `TELEPAD_*` is now `BECKON_*` (`BECKON_FEED`, `BECKON_DOWNLOADS`, `BECKON_REPO`, `BECKON_DEV_UPDATE_ORIGIN`). The old names are no longer read.
+- **Pairing links:** QR codes now carry `beckon://pair?...`. Codes made by Telepad do not open in Beckon.
+- **Release files** are named `beckon-...`, and the website is <https://beckon.omsingh.me>. The old address redirects to it.
+
 ## [2.0.0] - 2026-10-07
 
 A new desktop app and server for Windows, Linux and macOS, and a redesigned Android app.
