@@ -1,6 +1,3 @@
-> [!WARNING]
-> **Under Maintenance**: Beckon is currently undergoing maintenance and release setup. Pre-built downloads and package updates will be available shortly.
-
 <div align="center">
 
 <picture>
@@ -93,7 +90,7 @@ gh attestation verify beckon-android.apk --repo omsingh02/beckon   # and GitHub 
 
 ### Updates
 
-Beckon looks for a newer version when it starts and then once a day (the desktop app and the phone app each do), and says so: the tray menu offers **Update to 2.0.0-alpha.5…**, the page has a notice with an **Install and restart** button, and on the phone **Settings → About** shows the version with a dot on Settings. Nothing is installed until you press the button. It is one request for GitHub's public list of releases, which carries no identifier (see [PRIVACY.md](PRIVACY.md)); switch it off with *Looks for updates: off* in the page's footer or *Look for updates* in **Settings → About**, and use **Check for updates** whenever you like.
+Beckon looks for a newer version when it starts and then once a day (the desktop app and the phone app each do), and says so: the tray menu offers **Update to 2.1.0…**, the page has a notice with an **Install and restart** button, and on the phone **Settings → About** shows the version with a dot on Settings. Nothing is installed until you press the button. It is one request for GitHub's public list of releases, which carries no identifier (see [PRIVACY.md](PRIVACY.md)); switch it off with *Looks for updates: off* in the page's footer or *Look for updates* in **Settings → About**, and use **Check for updates** whenever you like.
 
 What *Install* does depends on how that copy was installed. In every case the file is downloaded from the release and its SHA-256 is checked against the release's `SHA256SUMS` first; a file that does not match is thrown away.
 
