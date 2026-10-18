@@ -4,6 +4,10 @@ All notable changes are listed here, newest first. The format follows [Keep a Ch
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-18
+
+The first stable release under the name Beckon (formerly Telepad). It brings a new desktop app and server for Windows, Linux and macOS, and a redesigned Android app.
+
 ### Renamed Telepad to Beckon
 
 The project is now **Beckon** (formerly Telepad). The apps, packages, files and website use the new name. How it works, including the pairing protocol, has not changed.
@@ -17,10 +21,6 @@ The project is now **Beckon** (formerly Telepad). The apps, packages, files and 
 - **Environment variables:** `TELEPAD_*` is now `BECKON_*` (`BECKON_FEED`, `BECKON_DOWNLOADS`, `BECKON_REPO`, `BECKON_DEV_UPDATE_ORIGIN`). The old names are no longer read.
 - **Pairing links:** QR codes now carry `beckon://pair?...`. Codes made by Telepad do not open in Beckon.
 - **Release files** are named `beckon-...`, and the website is <https://beckon.omsingh.me>. The old address redirects to it.
-
-## [2.0.0] - 2026-10-07
-
-A new desktop app and server for Windows, Linux and macOS, and a redesigned Android app.
 
 ### Upgrading from 1.x
 
